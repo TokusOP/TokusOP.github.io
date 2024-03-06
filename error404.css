@@ -1,0 +1,24 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-image: url('img/host.png'); /* Ruta a tu imagen de fondo */
+    background-size: cover; /* Ajusta la imagen de fondo para que cubra toda la página */
+    background-repeat: no-repeat; /* Evita que la imagen de fondo se repita */
+    background-position: top; /* Centra la imagen de fondo horizontal y verticalmente */
+}
+
+.separador {
+    position: fixed;
+    bottom: 0%;
+    left: 0%;
+    width: 100%;
+    height: 100%; /* Ajusta la altura del separador según sea necesario */
+    background-color: #111111a9; /* Color del separador */
+    z-index: -1; /* Coloca el separador detrás del contenido */
+}
+
+video {
+    width: 320px; /* Ancho del video */
+    height: 180px; /* Altura del video */
+  }
