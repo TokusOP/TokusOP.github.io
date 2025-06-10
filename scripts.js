@@ -7,7 +7,12 @@ function openWindow(windowId) {
         windowContent.innerHTML = template.innerHTML;
         document.getElementById('window-title').textContent = 
             windowId === 'home' ? 'Inicio' : 
-            windowId === 'projects' ? 'Proyectos' : 'Contacto';
+            windowId === 'projects' ? 'Proyectos' : 
+            windowId === 'contact' ? 'Contacto' :  
+            windowId === 'game' ? 'Juego' :  
+            windowId === 'terminal' ? 'Terminal' : 
+            windowId === 'music-player' ? 'Reproductor' :   
+            page ;
         
         const mainWindow = document.getElementById('main-window');
         mainWindow.style.display = 'flex';
@@ -240,26 +245,13 @@ function toggleDarkMode() {
     const desktop = document.querySelector('.desktop');
     const isDarkMode = body.classList.toggle('dark-mode');
     
-
-    if (isDarkMode) {
-        desktop.style.backgroundImage = "url('images/background-dark.jpg')";
-        localStorage.setItem('darkMode', 'enabled');
-    } else {
-        desktop.style.backgroundImage = "url('images/background.jpg')";
-        localStorage.setItem('darkMode', 'disabled');
     }
-}
 
 
 function checkDarkModePreference() {
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
     const localStoragePref = localStorage.getItem('darkMode');
-    
-    if (localStoragePref === 'enabled' || (localStoragePref === null && prefersDark)) {
-        document.body.classList.add('dark-mode');
-        document.querySelector('.desktop').style.backgroundImage = "url('images/background-dark.jpg')";
     }
-}
 
 document.addEventListener('DOMContentLoaded', function() {
     checkDarkModePreference();
@@ -331,10 +323,48 @@ const commands = {
             return "Ejecutando Animal Crossing New Horizons...  ";
         }
     },
+    404: {
+        hidden: true,
+        execute: () => {
+            return "Ejecutando Animal Crossing New Horizons...  ";
+        }
+    },
     makecoffee: {
         hidden: true,
         execute: () => {
             return "Error: No hay dispositivo de café conectado. ¿Quieres un café virtual? ☕";
+        }
+    },
+
+    error404: {
+        hidden: true,
+        execute: () => {
+            window.location.href = '404.html';
+            return "Redirigiendo a la dimensión desconocida...";
+        }
+    },
+    crash: {
+        hidden: true,
+        execute: () => {
+            const terminalOutput = document.getElementById('terminal-output');
+            terminalOutput.innerHTML = `
+                <div style="color:red;font-weight:bold;">
+                ■ ERROR FATAL ■<br>
+                EXCEPTION 0E EN 0028:C0011E36<br>
+                SYSTEM HALTED<br><br>
+                </div>
+                <div>
+                Causa posible:<br>
+                - Memoria insuficiente<br>
+                - Virus detectado<br>
+                - Archivo corrupto<br><br>
+                </div>
+                <div class="command-line">
+                C:\> <span class="cursor">_</span>
+                </div>
+            `;
+            new Audio('sounds/error.mp3').play();
+            return "";
         }
     }
 };
@@ -680,4 +710,280 @@ document.addEventListener('DOMContentLoaded', function() {
   editableElements.forEach(el => {
     el.style.userSelect = 'text';
   });
+});
+
+function adjustGrid() {
+    const grid = document.querySelector('.desktop-grid');
+    const screenWidth = window.innerWidth;
+    const iconWidth = 80;
+    const gap = 20;
+    const columns = Math.floor(screenWidth / (iconWidth + gap));
+    
+    grid.style.gridTemplateColumns = `repeat(${columns}, ${iconWidth}px)`;
+}
+
+window.addEventListener('resize', adjustGrid);
+adjustGrid(); 
+function adjustIconGrid() {
+  const grid = document.querySelector('.desktop-grid');
+  const iconWidth = 80;
+  const gap = 20;
+  const availableWidth = window.innerWidth - 30; 
+  const columns = Math.max(1, Math.floor(availableWidth / (iconWidth + gap)));
+  
+  grid.style.gridTemplateColumns = `repeat(${columns}, ${iconWidth}px)`;
+}
+
+window.addEventListener('resize', adjustIconGrid);
+window.addEventListener('load', adjustIconGrid);
+
+document.getElementById('start-button').addEventListener('click', function(e) {
+    e.stopPropagation();
+    const menu = document.getElementById('start-menu');
+    menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+});
+
+
+document.addEventListener('click', function() {
+    document.getElementById('start-menu').style.display = 'none';
+});
+
+
+document.getElementById('start-menu').addEventListener('click', function(e) {
+    e.stopPropagation();
+});
+
+
+function logout() {
+    if (confirm('¿Estás seguro de que quieres salir?')) {
+        document.body.classList.add('shutdown-effect');
+        setTimeout(() => {
+            alert('Sistema apagado. ¡Hasta pronto!');
+        }, 1000);
+    }
+}
+function openTab(tabId) {
+    document.querySelectorAll('.tab-content').forEach(tab => {
+        tab.style.display = 'none';
+    });
+    document.querySelectorAll('.tab-button').forEach(btn => {
+        btn.classList.remove('active');
+    });
+    
+    document.getElementById(tabId).style.display = 'block';
+    event.currentTarget.classList.add('active');
+}
+function toggleDarkMode() {
+    document.body.classList.toggle('dark-mode');
+    localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
+}
+
+function applyWallpaper() {
+    const wallpaper = document.getElementById('wallpaper-select').value;
+    document.querySelector('.wallpaper').style.backgroundImage = `url('images/${wallpaper}')`;
+}
+
+function updatePerformanceMeters() {
+    const cpu = Math.min(100, Math.floor(Math.random() * 30) + 20);
+    const ram = Math.min(100, Math.floor(Math.random() * 40) + 30);
+    const disk = Math.min(100, Math.floor(Math.random() * 50) + 10);
+    
+    document.getElementById('cpu-meter').style.width = `${cpu}%`;
+    document.getElementById('cpu-meter').textContent = `${cpu}%`;
+    document.getElementById('ram-meter').style.width = `${ram}%`;
+    document.getElementById('ram-meter').textContent = `${ram}%`;
+    document.getElementById('disk-meter').style.width = `${disk}%`;
+    document.getElementById('disk-meter').textContent = `${disk}%`;
+}
+
+setInterval(updatePerformanceMeters, 2000);
+
+
+function changePassword() {
+    alert('Función no implementada\n(Simulación de Windows 95)');
+}
+
+function endProcess() {
+    alert('Acceso denegado\n¡virus.exe no puede ser terminado!');
+}
+
+function applyWallpaper() {
+    const selectedWallpaper = document.getElementById('wallpaper-select').value;
+    const wallpaperElement = document.querySelector('.wallpaper');
+    
+
+    wallpaperElement.style.backgroundImage = `url('images/${selectedWallpaper}')`;
+
+    localStorage.setItem('selectedWallpaper', selectedWallpaper);
+
+    const btn = event.target;
+    btn.textContent = '✓ Aplicado!';
+    setTimeout(() => {
+        btn.textContent = 'Aplicar';
+    }, 2000);
+}
+
+function loadWallpaper() {
+    const savedWallpaper = localStorage.getItem('selectedWallpaper');
+    if (savedWallpaper) {
+        document.querySelector('.wallpaper').style.backgroundImage = `url('images/${savedWallpaper}')`;
+        document.getElementById('wallpaper-select').value = savedWallpaper;
+    }
+}
+
+function toggleDarkMode() {
+    const isDarkMode = document.body.classList.toggle('dark-mode');
+    localStorage.setItem('darkMode', isDarkMode);
+
+    document.getElementById('dark-mode-toggle').checked = isDarkMode;
+
+    document.body.style.transition = 'background 0.5s ease';
+}
+
+function loadDarkModePreference() {
+    const darkModeEnabled = localStorage.getItem('darkMode') === 'true';
+    if (darkModeEnabled) {
+        document.body.classList.add('dark-mode');
+        document.getElementById('dark-mode-toggle').checked = true;
+    }
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+    loadDarkModePreference();
+    loadWallpaper();
+    
+
+    setInterval(updatePerformanceMeters, 2000);
+});
+window.addEventListener('load', () => {
+    document.getElementById('xp-login').style.display = 'flex';
+});
+
+
+function login(username) {
+    const loginScreen = document.getElementById('xp-login');
+    loginScreen.style.opacity = '0';
+    loginScreen.style.transition = 'opacity 0.5s ease';
+    
+    new Audio('sounds/windows-login.mp3').play();
+    
+
+    setTimeout(() => {
+        loginScreen.style.display = 'none';
+ 
+        initDesktop();
+    }, 500);
+}
+
+
+function showHelp() {
+    alert("Ayuda de Windows XP\n\nSolo haz clic en tu usuario para entrar.");
+}
+
+function shutdown() {
+    if(confirm("¿Estás seguro de que quieres salir?")) {
+        document.body.style.animation = "fadeOut 1s forwards";
+        setTimeout(() => {
+            window.location.href = "about:blank";
+        }, 1000);
+    }
+}
+
+
+document.styleSheets[0].insertRule(`
+    @keyframes fadeOut {
+        to { opacity: 0; }
+    }
+`, 0);
+document.addEventListener('DOMContentLoaded', function() {
+    const music = document.getElementById('bg-music');
+    const toggleBtn = document.getElementById('music-toggle');
+    
+    function startMusic() {
+  
+        toggleBtn.click();
+        
+
+        music.volume = 0.3;
+        
+
+        setTimeout(() => {
+            toggleBtn.remove();
+        }, 1000);
+    }
+    
+
+    function toggleMusic() {
+        if (music.paused) {
+            music.play().catch(e => console.log("Error al reproducir:", e));
+        } else {
+            music.pause();
+        }
+    }
+    
+
+    const playPromise = music.play();
+    
+    if (playPromise !== undefined) {
+        playPromise.catch(() => {
+            const musicHint = document.createElement('div');
+            musicHint.innerHTML = `
+                <div style="
+                    position: fixed;
+                    bottom: 10px;
+                    right: 10px;
+                    background: rgba(0,0,0,0.7);
+                    color: white;
+                    padding: 5px;
+                    font-family: 'Courier New';
+                    font-size: 12px;
+                ">
+                    Presiona <kbd>M</kbd> para activar la música
+                </div>
+            `;
+            document.body.appendChild(musicHint);
+            
+            document.addEventListener('keydown', (e) => {
+                if (e.key.toLowerCase() === 'm') {
+                    startMusic();
+                    musicHint.remove();
+                }
+            });
+        });
+    }
+});
+document.addEventListener('keydown', (e) => {
+    if (e.ctrlKey && e.altKey && e.key.toLowerCase() === 'a') {
+        // Efecto retro de confirmación
+        document.body.innerHTML = `
+            <div style="
+                background: #000080;
+                color: white;
+                font-family: 'Courier New';
+                height: 100vh;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+            ">
+                <h1>💿 CARGANDO ANACLETO.EXE...</h1>
+                <p>Por favor conteste ese telefono...</p>
+                <div style="border: 2px solid white; width: 50%; margin: 20px;">
+                    <div id="load-bar" style="height: 20px; width: 0%; background: white;"></div>
+                </div>
+            </div>
+        `;
+        
+        // Barra de carga falsa
+        let width = 0;
+        const bar = document.getElementById('load-bar');
+        const loadInterval = setInterval(() => {
+            width += 5;
+            bar.style.width = `${width}%`;
+            if (width >= 100) {
+                clearInterval(loadInterval);
+                window.location.href = "https://www.youtube.com/watch?v=VAQYRhvxEXM";
+            }
+        }, 100);
+    }
 });

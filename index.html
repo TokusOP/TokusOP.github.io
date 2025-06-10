@@ -8,7 +8,34 @@
     <link rel="icon" type="image/x-icon" href="images/logo6.ico">
 </head>
 <body>
-    <div class="desktop">
+<div id="xp-login" class="xp-login-screen">
+    <div class="xp-login-box">
+        <div class="xp-header">
+            <img src="images/xp-logo.png" alt="Windows XP" class="xp-logo">
+            <h2>Bienvenido a Windows XP</h2>
+        </div>
+        
+        <div class="xp-user-list">
+            <div class="xp-user" onclick="login('Guppy')">
+                <img src="images/guppy.png" alt="Guppy">
+                <span>Guppy</span>
+            </div>
+        </div>
+        
+        <div class="xp-footer">
+            <p>Haz clic en tu nombre de usuario para comenzar</p>
+            <div class="xp-buttons">
+                <button class="xp-button" onclick="showHelp()">Ayuda</button>
+                <button class="xp-button" onclick="shutdown()">Apagar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="desktop">
+  <div class="wallpaper"></div>
+  
+  <div class="desktop-icons-container">
+    <div class="desktop-grid">
         <div class="icon" onclick="openWindow('home')">
             <img src="images/icon-home.png" alt="Inicio">
             <span>Inicio</span>
@@ -39,9 +66,45 @@
         </div>
 
 <div class="taskbar">
-    <div class="start-button">Inicio</div>
-    <div class="dark-mode-toggle" onclick="toggleDarkMode()">
-        <img src="images/icon-moon.png" alt="Modo Oscuro" title="Modo Oscuro/Claro">
+    <div class="start-button" id="start-button">
+        <img src="images/icon-menu.png" alt="Inicio" class="start-icon">
+        <span>Inicio</span>
+    </div>
+    <div class="start-menu" id="start-menu">
+        <div class="menu-header">
+            <img src="images/guppy.png" alt="Usuario">
+            <span>Guppy</span>
+        </div>
+        <div class="menu-section">
+            <div class="menu-item" onclick="openWindow('home')">
+                <img src="images/icon-home.png" alt="Inicio">
+                <span>Página Principal</span>
+            </div>
+            <div class="menu-item" onclick="openWindow('projects')">
+                <img src="images/icon-projects.png" alt="Proyectos">
+                <span>Mis Proyectos</span>
+            </div>
+            <div class="menu-item" onclick="openWindow('music-player')">
+                <img src="images/icon-music.png" alt="Música">
+                <span>Reproductor</span>
+            </div>
+        </div>
+        <div class="menu-section">
+            <div class="menu-item" onclick="openWindow('terminal')">
+                <img src="images/icon-terminal.png" alt="Terminal">
+                <span>Terminal</span>
+            </div>
+            <div class="menu-item" onclick="openWindow('settings')">
+                <img src="images/icon-settings.png" alt="Configuración">
+                <span>Configuración</span>
+            </div>
+        </div>
+        <div class="menu-footer">
+            <div class="menu-item" onclick="logout()">
+                <img src="images/icon-power.png" alt="Apagar">
+                <span>Apagar</span>
+            </div>
+        </div>
     </div>
     <div class="time" id="clock">00:00:00</div>
 </div>
@@ -177,7 +240,6 @@
         <div class="game-controls">
             <p>Puntuación: <span id="score">0</span></p>
             <button onclick="startGame()">Comenzar</button>
-            <button onclick="pauseGame()">Pausa</button>
             <p>Controles: Flechas del teclado</p>
         </div>
     </div>
@@ -188,9 +250,6 @@
         <div class="terminal-header">
             <span>TERMINAL.EXE</span>
             <div class="terminal-controls">
-                <button class="minimize">_</button>
-                <button class="maximize">□</button>
-                <button class="close" onclick="closeTerminal()">X</button>
             </div>
         </div>
         <div class="terminal-body" id="terminal-output">
@@ -203,7 +262,90 @@
                onkeydown="handleTerminalInput(event)">
     </div>
 </div>
-
+<div id="settings-content" class="window-template">
+    <h1>Configuración del Sistema</h1>
+    
+    <div class="settings-tabs">
+        <button class="tab-button active" onclick="openTab('tab-user')">Usuario</button>
+        <button class="tab-button" onclick="openTab('tab-display')">Pantalla</button>
+        <button class="tab-button" onclick="openTab('tab-performance')">Rendimiento</button>
+    </div>
+    
+    <div class="tab-content" id="tab-user">
+        <div class="user-profile">
+            <img src="images/guppy.png" alt="Guppy" class="user-avatar">
+            <div class="user-info">
+                <h2>Guppy</h2>
+                <p>Usuario Administrador</p>
+                <p>Miembro desde: 1995</p>
+            </div>
+        </div>
+        <button class="retro-button" onclick="changePassword()">Cambiar Contraseña</button>
+    </div>
+    
+    <div class="tab-content" id="tab-display" style="display:none">
+        <div class="setting-item">
+            <label>Modo Oscuro:</label>
+            <label class="retro-switch">
+                <input type="checkbox" id="dark-mode-toggle" onchange="toggleDarkMode()">
+                <span class="slider"></span>
+            </label>
+        </div>
+        
+        <div class="setting-item">
+            <label>Fondo de Pantalla:</label>
+            <select id="wallpaper-select" class="retro-dropdown">
+                <option value="background.jpg">Classic</option>
+                <option value="background-dark.jpg">Vapor</option>
+                <option value="mountains.jpg">Mountains</option>
+            </select>
+            <button class="retro-button" onclick="applyWallpaper()">Aplicar</button>
+        </div>
+        
+        <div class="setting-item">
+            <label>Resolución:</label>
+            <select class="retro-dropdown">
+                <option>640x480 (VGA)</option>
+                <option selected>800x600 (SVGA)</option>
+                <option>1024x768 (XGA)</option>
+            </select>
+        </div>
+    </div>
+    
+    <div class="tab-content" id="tab-performance" style="display:none">
+        <h3>Administrador de Tareas</h3>
+        <div class="performance-meters">
+            <div class="meter">
+                <label>Uso de CPU:</label>
+                <div class="meter-bar">
+                    <div class="meter-fill" id="cpu-meter" style="width: 23%">23%</div>
+                </div>
+            </div>
+            <div class="meter">
+                <label>Uso de RAM:</label>
+                <div class="meter-bar">
+                    <div class="meter-fill" id="ram-meter" style="width: 65%">65%</div>
+                </div>
+            </div>
+            <div class="meter">
+                <label>Disco (C:):</label>
+                <div class="meter-bar">
+                    <div class="meter-fill" id="disk-meter" style="width: 42%">42%</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="process-list">
+            <h4>Procesos Activos:</h4>
+            <ul>
+                <li>winfile.exe <span>12% CPU</span></li>
+                <li>sol.exe <span>8% CPU</span></li>
+            </ul>
+        </div>
+        
+        <button class="retro-button danger" onclick="endProcess()">Finalizar Proceso</button>
+    </div>
+</div>
 <div id="desktop-pet" onclick="playPetSound()">
   <img src="images/pet.png" alt="Mascota Virtual" id="pet-image">
 </div>
