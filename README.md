@@ -9,6 +9,8 @@
 </div>
 
 ---
+### `>> FUNCION`
+![Image](https://github.com/user-attachments/assets/a8bf6fcb-b6ff-48af-92ad-c9b1754a106d)
 
 ### `>> CARGANDO SISTEMA`  
 - **Alma de píxeles**: Un explorador de mazmorras y un pirata de shooters.
