@@ -1,20 +1,21 @@
-# 🖥️ Tokus' Digital Hub  
-**// Retro-inspired portfolio & personal space**  
+# 💾 Tokus' Digital Wasteland
+
+**// Archivos de sistema corrompidos con arte, nostalgia y bugs.**
 
 <div align="center">
   <img src="https://img.shields.io/badge/CRT_GLOW-ON-ff66ff?style=for-the-badge" alt="CRT ON">
-  <img src="https://img.shields.io/badge/SOUNDTRACK-LoFi_Breakcore-00ccff?style=for-the-badge" alt="Music">
+  <img src="https://img.shields.io/badge/SOUNDTRACK-Breakcore_y_LoFi-00ccff?style=for-the-badge" alt="Music">
   <img src="https://img.shields.io/badge/OS-Windows_XP_Energy-ff9900?style=for-the-badge" alt="WinXP Style">
 </div>
 
 ---
 
-### `>> KEY FEATURES`  
-- **Pixelated soul**: RPG + shooter + open-world lover.  
-- **Aesthetic**: CRT effects, nostalgic WinXP design.  
-- **Skills**: Basic programming + digital art.  
+### `>> CARGANDO SISTEMA`  
+- **Alma de píxeles**: Un explorador de mazmorras y un pirata de shooters.
+- **Estética**: El brillo defectuoso de un monitor CRT y la energía de Windows XP.
+- **Habilidades**: Programación básica, diseño digital, y la capacidad de convertir errores en arte.
 
-### `>> TECH STACK`  
+### `>> CARPETA DE RECURSOS`  
 ```bash
-🖌️ Frontend: HTML5 | CSS3 | JavaScript (CRT filter via CSS)  
-🎮 Backend: (Coming soon? Static site for now!)  
+🖌️ Frontend: HTML5 | CSS3 | JavaScript
+🎮 Backend: Sitio estático. Por ahora, no hay conexión a la red.
