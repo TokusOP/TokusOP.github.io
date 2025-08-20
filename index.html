@@ -11,8 +11,8 @@
 <div id="xp-login" class="xp-login-screen">
     <div class="xp-login-box">
         <div class="xp-header">
-            <img src="images/xp-logo.png" alt="Windows XP" class="xp-logo">
-            <h2>Bienvenido a Windows XP</h2>
+            <span class="xp-header-text">Para empezar, haz clic en tu nombre de usuario</span>
+            <img src="images/xp-logo.png" alt="Windows XP Logo" class="xp-logo">
         </div>
         
         <div class="xp-user-list">
@@ -23,10 +23,11 @@
         </div>
         
         <div class="xp-footer">
-            <p>Haz clic en tu nombre de usuario para comenzar</p>
             <div class="xp-buttons">
-                <button class="xp-button" onclick="showHelp()">Ayuda</button>
-                <button class="xp-button" onclick="shutdown()">Apagar</button>
+                <button class="xp-button" onclick="shutdown()">
+                    <img src="images/icon-power.png" alt="Apagar"/>
+                    Apagar equipo
+                </button>
             </div>
         </div>
     </div>
@@ -48,9 +49,17 @@
             <img src="images/icon-contact.png" alt="Contacto">
             <span>Contacto</span>
         </div>
+        <div class="icon" onclick="openBrowser()">
+            <img src="images/sunrise.png" alt="Navegador"> 
+            <span>Hotline Explorer</span>
+        </div>
         <div class="icon" onclick="openWindow('game')">
             <img src="images/icon-game.png" alt="Juego">
             <span>Juego</span>
+        </div>
+        <div class="icon" onclick="openWindow('paint')">
+            <img src="images/icon-paint.png" alt="Paint"> 
+            <span>Paint</span>
         </div>
         <div class="icon" onclick="openWindow('terminal')">
             <img src="images/icon-terminal.png" alt="Terminal">
@@ -60,11 +69,20 @@
             <img src="images/icon-music.png" alt="Reproductor">
             <span>Reproductor</span>
         </div>
+                <div class="icon" onclick="accessEasterEggs()">
+            <img src="images/icon-secret.png" alt="Secretos">
+            <span>Secretos</span>
+        </div>
+        <div class="icon" onclick="openWindow('explorer')">
+            <img src="images/icon-explorer.png" alt="Explorador">
+            <span>Explorador</span>
+        </div>
         <div class="icon" onclick="activateVirus()">
             <img src="images/game.png" alt="Virus.exe">
             <span>Juego.exe</span>
         </div>
-
+    </div>
+  </div>
 <div class="taskbar">
     <div class="start-button" id="start-button">
         <img src="images/icon-menu.png" alt="Inicio" class="start-icon">
@@ -98,6 +116,14 @@
                 <img src="images/icon-settings.png" alt="Configuración">
                 <span>Configuración</span>
             </div>
+            <div class="menu-item" onclick="accessEasterEggs()">
+                <img src="images/icon-secret.png" alt="Secretos">
+                <span>Secretos</span>
+            </div>
+            <div class="menu-item" onclick="openWindow('explorer')">
+                <img src="images/icon-explorer.png" alt="Explorador">
+                <span>Explorador</span>
+            </div>
         </div>
         <div class="menu-footer">
             <div class="menu-item" onclick="logout()">
@@ -113,7 +139,7 @@
             <div class="window-header">
                 <span id="window-title">Bienvenido</span>
                 <div class="window-controls">
-                    <button class="minimize">_</button>
+                    <button class="minimize" onclick="closeWindow()">_</button>
                     <button class="maximize">□</button>
                     <button class="close" onclick="closeWindow()">X</button>
                 </div>
@@ -127,14 +153,19 @@
         <h1>Bienvenido a mi sitio</h1>
         <div class="content-row">
             <div class="text-content">
-                <p>// Programmer | Digital Artist | Old Web Enthusiast</p>
-                <p>> BIOS:</p>
-                <p>Código escrito en RPGs, balas perdidas en shooters, y mundos por explorar.</p>
+                <p>// Accediendo a la mente de Tokus...</p>
+                <p>ㅤ</p>
+                <p>>> BIOS:</p>
+                <p>> Bienvenido a un rincón olvidado de la red, un santuario digital construido con el resplandor de una pantalla CRT. Esto no es solo un portafolio, es un viaje al interior de un disco duro de los 90, donde cada archivo es un recuerdo y cada glitch es una obra de arte.</p>
+                <p>ㅤ</p>
                 <p>> SOUNDTRACK: Lofi para el alma, breakcore para el caos.</p>
+                <p>ㅤ</p>
                 <p>> AESTHETIC: CRT glow + nostalgia de Windows XP.</p>
+                <p>ㅤ</p>
                 <p>>> SKILLS:</p>
                 <p>Dibujo.exe | Programación.bat | Resetear_para_más_ideas.vbs</p>
-                <p>// Presiona [START] para conectar.</p>
+                <p>ㅤ</p>
+                <p>// Presiona [ENTER] para conectar.</p>
             </div>
             <div class="image-content">
                 <img src="images/tokus.png" alt="Mi foto">
@@ -177,9 +208,10 @@
         <div class="playlist">
             <h3>Lista de canciones</h3>
             <ul id="playlist">
-                <li onclick="playSong(0)">1. yume 2kki - lotus waters</li>
-                <li onclick="playSong(1)">1. C418 - Dog</li>
-                <li onclick="playSong(2)">1. Eternal.Temp - Graham Kartna</li>
+                <li onclick="playSong(0)">1. lotus waters - yume 2kki</li>
+                <li onclick="playSong(1)">2. 031. Waterfall - Toby Fox</li>
+                <li onclick="playSong(2)">3. Dog - C418</li>
+                <li onclick="playSong(3)">4. Song of Healing - Koji Kondo</li>
             </ul>
         </div>
     </div>
@@ -220,7 +252,7 @@
             </div>
             <div class="contact-method">
                 <div class="contact-label">Instagram:</div>
-                <a href="https://www.instagram.com/tokus.99/" target="_blank" class="contact-link">@tokus.99</a>
+                <a href="https://www.instagram.com/sudo.su99/" target="_blank" class="contact-link">@sudo.su99</a>
             </div>
             <div class="contact-method">
                 <div class="contact-label">YouTube:</div>
@@ -298,6 +330,7 @@
                 <option value="background.jpg">Classic</option>
                 <option value="background-dark.jpg">Vapor</option>
                 <option value="mountains.jpg">Mountains</option>
+                <option value="sadness.jpg">Sadness</option>
             </select>
             <button class="retro-button" onclick="applyWallpaper()">Aplicar</button>
         </div>
@@ -346,12 +379,131 @@
         <button class="retro-button danger" onclick="endProcess()">Finalizar Proceso</button>
     </div>
 </div>
+<div id="eastereggs-content" class="window-template">
+    <h1>Comandos Secretos de Terminal</h1>
+    <div class="content-row">
+        <ul id="easteregg-list">
+        </ul>
+    </div>
+</div>
+<div id="explorer-content" class="window-template">
+    <h1>Explorador de Archivos</h1>
+    <div class="file-explorer-toolbar">
+        <button class="retro-button" onclick="loadFiles()">Actualizar</button>
+    </div>
+    <div class="file-list-container">
+        <ul id="file-list"></ul>
+    </div>
+</div>
+<div id="notepad-content" class="window-template">
+    <div class="notepad-header">
+        <span id="notepad-title"></span>
+    </div>
+    <div class="notepad-content" id="notepad-text"></div>
+</div>
 <div id="desktop-pet" onclick="playPetSound()">
   <img src="images/pet.png" alt="Mascota Virtual" id="pet-image">
+  <div id="pet-speech-bubble" class="speech-bubble"></div>
 </div>
 
 
 <audio id="pet-sound" src="sounds/pet.mp3"></audio>
+<div id="paint-content" class="window-template">
+    <div class="paint-toolbar">
+        <div class="color-palette">
+            <div class="color-swatch active" style="background-color: black;" onclick="changeColor('black', this)"></div>
+            <div class="color-swatch" style="background-color: red;" onclick="changeColor('red', this)"></div>
+            <div class="color-swatch" style="background-color: green;" onclick="changeColor('green', this)"></div>
+            <div class="color-swatch" style="background-color: blue;" onclick="changeColor('blue', this)"></div>
+            <div class="color-swatch" style="background-color: yellow;" onclick="changeColor('yellow', this)"></div>
+            <div class="color-swatch" style="background-color: white;" onclick="changeColor('white', this)"></div>
+        </div>
+        <button class="retro-button" id="clear-canvas-btn">Limpiar</button>
+    </div>
+    <canvas id="paint-canvas"></canvas>
+</div>
+<div id="browser-window" class="window" style="display: none;">
+    <div class="window-header">
+        <span id="browser-title">Tokus Explorer</span>
+        <div class="window-controls">
+            <button class="close" onclick="closeBrowser()">X</button>
+        </div>
+    </div>
+    <div class="browser-toolbar">
+        <button onclick="browserGoBack()">◄</button>
+        <button onclick="browserGoForward()">►</button>
+        <button onclick="navigateTo('home')">⌂</button> <div class="address-bar-container">
+            <span class="protocol">tokus://</span>
+            <input type="text" id="address-bar" value="home" readonly>
+        </div>
+    </div>
+    <div class="browser-content">
+
+        <div id="page-home" class="browser-page active">
+            <div class="homepage-container">
+                <img src="images/sunrise.png" alt="logo" class="homepage-logo">
+                <div class="homepage-search-bar">
+                    <input type="text" placeholder="Buscar en TokusNet o introducir dirección...">
+                </div>
+                <div class="homepage-shortcuts">
+                    <div class="shortcut" onclick="navigateTo('youtube')">
+                        <div class="shortcut-icon" style="background-color: #ff0000;">T</div>
+                        <span>TuxTube</span>
+                    </div>
+                    <div class="shortcut" onclick="navigateTo('geocities')">
+                        <div class="shortcut-icon" style="background-color: #0000a0;">G</div>
+                        <span>GeoCities</span>
+                    </div>
+                    <div class="shortcut" onclick="navigateTo('404')">
+                        <div class="shortcut-icon" style="background-color: #800000;">!</div>
+                        <span>???</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="page-youtube" class="browser-page">
+            <div class="youtube-header">
+                <img src="images/tuxtube-icon.png" alt="logo" style="width: 40px; height: 40px;">
+                <h1>TuxTube</h1>
+            </div>
+            <div class="video-player-container">
+                <h2>duende bailando wachiturro</h2>
+                <video controls width="100%">
+                    <source src="images/videoplayback.mp4" type="video/mp4">
+                    Tu navegador no soporta el tag de video.
+                </video>
+                <div class="video-info">
+                    <p>64,827 vistas • 12 sept 2011</p>
+                    <p>valdivia</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="page-geocities" class="browser-page">
+            <div class="geocities-content">
+                <h1 class="geo-title">~~Bienvenido al Cyber-Espacio de Tokus~~</h1>
+                <img src="images/blood3.gif" alt="En construcción">
+                <p class="geo-text">
+                    ¡Hola, viajero de la red! Has encontrado mi humilde morada digital.
+                    Este sitio está optimizado para Netscape Navigator 4.0.
+                </p>
+                <marquee>*** ¡Gracias por tu visita! ***</marquee>
+                <a href="#" onclick="navigateTo('youtube')">Mira mi video favorito</a>
+            </div>
+        </div>
+
+        <div id="page-404" class="browser-page">
+            <div class="error-404-container">
+                <h1 class="error-title">404 - Not Found</h1>
+                <p class="error-text">No sé qué esperabas encontrar aquí, pero no es esto.</p>
+                <p class="error-subtext">(´・ω・`)</p>
+                <a href="#" onclick="navigateTo('home')">Vuelve al inicio</a>
+            </div>
+        </div>
+    </div>
+</div>
+
     <script src="scripts.js"></script>
 </body>
 </html>

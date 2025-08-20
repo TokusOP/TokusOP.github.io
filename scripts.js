@@ -1,27 +1,48 @@
-
 function openWindow(windowId) {
     const windowContent = document.getElementById('window-content');
     const template = document.getElementById(`${windowId}-content`);
     
     if (template) {
+        if (gameLoop && windowId !== 'game') {
+            pauseGame();
+        }
+
         windowContent.innerHTML = template.innerHTML;
-        document.getElementById('window-title').textContent = 
-            windowId === 'home' ? 'Inicio' : 
-            windowId === 'projects' ? 'Proyectos' : 
-            windowId === 'contact' ? 'Contacto' :  
-            windowId === 'game' ? 'Juego' :  
-            windowId === 'terminal' ? 'Terminal' : 
-            windowId === 'music-player' ? 'Reproductor' :   
-            page ;
+        const windowTitles = {
+            'home': 'Inicio',
+            'projects': 'Proyectos',
+            'contact': 'Contacto',
+            'game': 'Juego',
+            'terminal': 'Terminal',
+            'music-player': 'Reproductor',
+            'settings': 'Configuración',
+            'eastereggs': 'Secretos',
+            'explorer': 'Explorador de Archivos',
+            'paint': 'Paint'
+        };
+        document.getElementById('window-title').textContent = windowTitles[windowId] || 'Página';
         
         const mainWindow = document.getElementById('main-window');
         mainWindow.style.display = 'flex';
+
+        if (windowId === 'game') {
+            startGame();
+        } else if (windowId === 'terminal') {
+            document.getElementById('terminal-input').focus();
+        } else if (windowId === 'eastereggs') {
+            loadEasterEggs();
+        } else if (windowId === 'explorer') {
+            loadFiles();
+        } else if (windowId === 'paint') {
+            initPaint();
+        }
     }
 }
 
 
 function closeWindow() {
     document.getElementById('main-window').style.display = 'none';
+    pauseGame();
 }
 
 
@@ -68,7 +89,7 @@ function makeDraggable(element) {
 
 document.addEventListener('DOMContentLoaded', function() {
     makeDraggable(document.getElementById('main-window'));
-
+    makeDraggable(document.getElementById('browser-window'));
     openWindow('home');
 });
 
@@ -88,11 +109,9 @@ function initGame() {
     const canvas = document.getElementById('game-canvas');
     snakeGame = canvas.getContext('2d');
     
-
     canvas.width = Math.floor(canvas.width / gridSize) * gridSize;
     canvas.height = Math.floor(canvas.height / gridSize) * gridSize;
     
-
     snake = [
         {x: 5 * gridSize, y: 10 * gridSize},
         {x: 4 * gridSize, y: 10 * gridSize},
@@ -127,11 +146,9 @@ function drawGame() {
     const canvas = document.getElementById('game-canvas');
     snakeGame.clearRect(0, 0, canvas.width, canvas.height);
     
-
     snakeGame.fillStyle = '#ff0000';
     snakeGame.fillRect(food.x, food.y, gridSize, gridSize);
     
-
     snake.forEach((segment, index) => {
         snakeGame.fillStyle = index === 0 ? '#00ff00' : '#00cc00';
         snakeGame.fillRect(segment.x, segment.y, gridSize, gridSize);
@@ -144,10 +161,8 @@ function drawGame() {
 function updateGame() {
     if (isPaused) return;
     
-
     direction = nextDirection;
     
-
     const head = {x: snake[0].x, y: snake[0].y};
     
     switch (direction) {
@@ -165,7 +180,6 @@ function updateGame() {
             break;
     }
     
-
     const canvas = document.getElementById('game-canvas');
     if (head.x < 0 || head.x >= canvas.width || head.y < 0 || head.y >= canvas.height) {
         gameOver();
@@ -210,12 +224,15 @@ function startGame() {
     isPaused = false;
     gameLoop = setInterval(gameStep, gameSpeed);
     
-
     document.getElementById('game-canvas').focus();
 }
 
 function pauseGame() {
-    isPaused = !isPaused;
+    if (gameLoop) {
+      clearInterval(gameLoop);
+      gameLoop = null; 
+      isPaused = true;
+    }
 }
 
 
@@ -228,7 +245,6 @@ function gameOver() {
 document.addEventListener('keydown', function(e) {
     const key = e.keyCode;
     
-
     if (key === 37 && direction !== 'right') nextDirection = 'left';
     else if (key === 38 && direction !== 'down') nextDirection = 'up';
     else if (key === 39 && direction !== 'left') nextDirection = 'right';
@@ -242,23 +258,22 @@ document.getElementById('game-canvas').tabIndex = 0;
 
 function toggleDarkMode() {
     const body = document.body;
-    const desktop = document.querySelector('.desktop');
-    const isDarkMode = body.classList.toggle('dark-mode');
-    
-    }
+    body.classList.toggle('dark-mode');
+    localStorage.setItem('darkMode', body.classList.contains('dark-mode'));
+}
 
 
 function checkDarkModePreference() {
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
     const localStoragePref = localStorage.getItem('darkMode');
-    }
+}
 
 document.addEventListener('DOMContentLoaded', function() {
     checkDarkModePreference();
 });
 
 let terminalHistory = [];
-let historyIndex = 0;
+let terminalHistoryIndex = 0;
 let secretMode = false;
 
 
@@ -268,7 +283,9 @@ const commands = {
         execute: () => {
             let output = "Comandos disponibles:<br>";
             for (const cmd in commands) {
-                output += `• ${cmd} - ${commands[cmd].description}<br>`;
+                if (!commands[cmd].hidden) {
+                    output += `• ${cmd} - ${commands[cmd].description}<br>`;
+                }
             }
             output += "<br>¡Prueba comandos secretos!";
             return output;
@@ -290,6 +307,7 @@ const commands = {
     },
     konami: {
         hidden: true,
+        description: "Activa/desactiva el modo secreto",
         execute: () => {
             secretMode = !secretMode;
             document.querySelector('.terminal-container').classList.toggle('terminal-secret-mode');
@@ -300,12 +318,14 @@ const commands = {
     },
     doom: {
         hidden: true,
+        description: "Activa el modo DOOM",
         execute: () => {
             return "IDDQD<br>IDKFA<br>¡Doom mode activado! Pero esto es solo simulado... por ahora.";
         }
     },
     matrix: {
         hidden: true,
+        description: "Inicia un efecto tipo Matrix",
         execute: () => {
             startMatrixEffect();
             return "¡Bienvenido a la Matrix!";
@@ -313,24 +333,21 @@ const commands = {
     },
     sudo: {
         hidden: true,
+        description: "Intenta obtener permisos de superusuario",
         execute: () => {
             return "¡Permiso denegado! (GETOUT!)";
         }
     },
     acnh: {
         hidden: true,
-        execute: () => {
-            return "Ejecutando Animal Crossing New Horizons...  ";
-        }
-    },
-    404: {
-        hidden: true,
+        description: "Comienza una sesión de Animal Crossing",
         execute: () => {
             return "Ejecutando Animal Crossing New Horizons...  ";
         }
     },
     makecoffee: {
         hidden: true,
+        description: "Prepara café virtual",
         execute: () => {
             return "Error: No hay dispositivo de café conectado. ¿Quieres un café virtual? ☕";
         }
@@ -338,6 +355,7 @@ const commands = {
 
     error404: {
         hidden: true,
+        description: "Redirige a la página 404",
         execute: () => {
             window.location.href = '404.html';
             return "Redirigiendo a la dimensión desconocida...";
@@ -345,6 +363,7 @@ const commands = {
     },
     crash: {
         hidden: true,
+        description: "Simula un error fatal",
         execute: () => {
             const terminalOutput = document.getElementById('terminal-output');
             terminalOutput.innerHTML = `
@@ -368,6 +387,20 @@ const commands = {
         }
     }
 };
+
+
+function loadEasterEggs() {
+    const list = document.getElementById('easteregg-list');
+    list.innerHTML = '';
+    
+    for (const cmd in commands) {
+        if (commands[cmd].hidden) {
+            const li = document.createElement('li');
+            li.innerHTML = `<strong>${cmd}</strong>: ${commands[cmd].description}`;
+            list.appendChild(li);
+        }
+    }
+}
 
 
 function startMatrixEffect() {
@@ -395,15 +428,12 @@ function handleTerminalInput(event) {
         const command = input.value.trim().toLowerCase();
         input.value = "";
         
-
         terminalHistory.push(command);
-        historyIndex = terminalHistory.length;
+        terminalHistoryIndex = terminalHistory.length;
         
-
         const terminalOutput = document.getElementById('terminal-output');
         terminalOutput.innerHTML += `<span class="command">${command}</span><br>`;
         
-
         let response = "";
         if (commands[command]) {
             response = commands[command].execute();
@@ -415,23 +445,22 @@ function handleTerminalInput(event) {
             terminalOutput.innerHTML += `<span class="output">${response}</span><br>`;
         }
         
-
         terminalOutput.innerHTML += '<p>> <span class="cursor" id="cursor">_</span></p>';
         terminalOutput.scrollTop = terminalOutput.scrollHeight;
     }
 
     else if (event.key === "ArrowUp") {
-        if (historyIndex > 0) {
-            historyIndex--;
-            document.getElementById('terminal-input').value = terminalHistory[historyIndex];
+        if (terminalHistoryIndex > 0) {
+            terminalHistoryIndex--;
+            document.getElementById('terminal-input').value = terminalHistory[terminalHistoryIndex];
         }
     }
     else if (event.key === "ArrowDown") {
-        if (historyIndex < terminalHistory.length - 1) {
-            historyIndex++;
-            document.getElementById('terminal-input').value = terminalHistory[historyIndex];
+        if (terminalHistoryIndex < terminalHistory.length - 1) {
+            terminalHistoryIndex++;
+            document.getElementById('terminal-input').value = terminalHistory[terminalHistoryIndex];
         } else {
-            historyIndex = terminalHistory.length;
+            terminalHistoryIndex = terminalHistory.length;
             document.getElementById('terminal-input').value = "";
         }
     }
@@ -454,16 +483,20 @@ let currentTrack = 0;
 
 const playlist = [
     { 
-        title: "yume 2kki - lotus waters",
-        src: "music/yume 2kki-lotus waters.mp3" 
+        title: "lotus waters - yume 2kki",
+        src: "music/lotus waters-yume 2kki.mp3" 
     },
     { 
-        title: "C418 - Dog",
+        title: "Waterfall - Toby Fox",
+        src: "music/Waterfall-Toby Fox.mp3" 
+    },
+    { 
+        title: "Dog - C418",
         src: "music/C418-Dog.mp3" 
     },
     { 
-        title: "Eternal.Temp - Graham Kartna",
-        src: "music/Eternal.Temp-GrahamKartna.mp3" 
+        title: "Song of Healing - Koji Kondo",
+        src: "music/Song of Healing-Koji Kondo.mp3" 
     }
 ];
 
@@ -471,11 +504,8 @@ const playlist = [
 function initPlayer() {
     audioPlayer.volume = 0.7;
     
-
     audioPlayer.addEventListener("timeupdate", updateProgressBar);
-
     audioPlayer.addEventListener("ended", nextTrack);
-
     setInterval(updateVisualizer, 100);
 }
 
@@ -546,16 +576,18 @@ window.onload = function() {
     initPlayer();
 };
 function activateVirus() {
+    if (!confirm('Este archivo podría contener contenido sensible, como fotos. ¿Estás seguro de que quieres ejecutarlo?')) {
+        return;
+    }
 
     document.body.style.pointerEvents = "none";
     
-
     const glitch = document.createElement("div");
+    let damage = 0;
     glitch.className = "glitch-effect";
     document.body.appendChild(glitch);
     glitch.style.display = "block";
     
-
     const errorMsg = document.createElement("div");
     errorMsg.className = "error-message";
     errorMsg.innerHTML = `
@@ -567,35 +599,31 @@ function activateVirus() {
     document.body.appendChild(errorMsg);
     errorMsg.style.display = "block";
     
-
     if (document.querySelector(".terminal")) {
         startMatrixEffect(); 
     }
     
-
-    const errorSound = new Audio("null");
+    const errorSound = new Audio("sounds/error.mp3");
     errorSound.loop = true;
     errorSound.play();
     
-   
     setInterval(() => {
         const elements = document.querySelectorAll("*");
         elements.forEach(el => {
             el.style.transform = `translate(${Math.random() * 20 - 10}px, ${Math.random() * 20 - 10}px)`;
         });
     }, 50);
+    setInterval(() => {
+        damage += Math.random() * 10;
+        errorMsg.innerHTML += `\nSistema dañado: ${Math.floor(damage)}%`;
+    }, 500);
 }
-let damage = 0;
-setInterval(() => {
-    damage += Math.random() * 10;
-    errorMsg.innerHTML += `\nSistema dañado: ${Math.floor(damage)}%`;
-}, 500);
 
 const konamiCode = ["ArrowUp", "ArrowUp", "ArrowDown", "ArrowDown", "ArrowLeft", "ArrowRight", "ArrowLeft", "ArrowRight", "b", "a", "Enter"];
 let konamiIndex = 0;
 
 document.addEventListener("keydown", (e) => {
-    if (e.key === konamiCode[konamiIndex]) {
+    if (e.key.toLowerCase() === konamiCode[konamiIndex]) {
         konamiIndex++;
         if (konamiIndex === konamiCode.length) {
             activateKonami();
@@ -607,11 +635,9 @@ document.addEventListener("keydown", (e) => {
 });
 
 function activateKonami() {
-
     document.body.classList.add("konami-effect");
     setTimeout(() => document.body.classList.remove("konami-effect"), 3000);
     
-
     const msg = document.createElement("div");
     msg.className = "konami-message";
     msg.textContent = "¡CÓDIGO KONAMI ACTIVADO! +30 vidas 🎮";
@@ -621,40 +647,94 @@ function activateKonami() {
 
 const pet = document.getElementById('desktop-pet');
 const petSound = document.getElementById('pet-sound');
+const speechBubble = document.getElementById('pet-speech-bubble');
+
+const randomPhrases = [
+  "Hola, camarada!",
+  "Eres real o ciencia ficción.",
+  "Encontraste algún bug? reportalo!",
+  "Windows XP nunca muere.",
+  "¡Huida de emergencia!",
+  "Tienes un ratón para mí?",
+  "He visto cosas que no creerías...",
+  "Miau!",
+  "Ay!",
+  "Dame dame croquetita.",
+  "En realidad yo soy la clave",
+  "¿Tienes algo para el hambre?"
+];
+
+let speechBubbleTimeout;
 
 function playPetSound() {
-  petSound.currentTime = 0;
-  petSound.play();
+    petSound.currentTime = 0;
+    petSound.play();
   
-  pet.style.transform = 'translateY(-20px)';
-  setTimeout(() => {
-    pet.style.transform = 'translateY(0)';
-  }, 200);
+    pet.style.transform = 'translateY(-20px)';
+    setTimeout(() => {
+        pet.style.transform = 'translateY(0)';
+    }, 200);
+
+    const randomPhrase = randomPhrases[Math.floor(Math.random() * randomPhrases.length)];
+    speechBubble.textContent = randomPhrase;
+    speechBubble.style.display = 'block';
+
+    clearTimeout(speechBubbleTimeout);
+    speechBubbleTimeout = setTimeout(() => {
+        speechBubble.style.display = 'none';
+    }, 3000);
 }
 
-function movePet() {
-  const x = Math.random() * (window.innerWidth - 100);
-  const y = Math.random() * (window.innerHeight - 100);
-  
-  pet.style.left = `${x}px`;
-  pet.style.top = `${y}px`;
-  
 
-  if (x > parseInt(pet.style.left || 0)) {
-    pet.querySelector('img').style.transform = 'scaleX(1)';
-  } else {
-    pet.querySelector('img').style.transform = 'scaleX(-1)';
-  }
+function accessEasterEggs() {
+    const password = prompt("Introduce la contraseña para acceder a los secretos:");
+    if (password === 'SCREAM_BOT') {
+        openWindow('eastereggs');
+    } else {
+        alert('Acceso denegado. Se ha notificado a las autoridades.');
+    }
 }
 
-setInterval(() => {
-    if (isDragging) return;
-    const x = Math.random() * (window.innerWidth - 100);
-    const y = Math.random() * (window.innerHeight - 100);
-    pet.style.transition = "left 2s, top 2s";
-    pet.style.left = `${x}px`;
-    pet.style.top = `${y}px`;
-}, 10000);
+
+const files = {
+    'guppy.txt': 'Guppy no era solo un gato, era un destello de luz anaranjada. Se movía por la casa como si el sol mismo hubiera decidido tomar una siesta en el sofá. Su pelo, del color de la mandarina más dulce, brillaba cada vez que los rayos de la tarde se filtraban por la ventana, haciendo que el salón se sintiera un poco más cálido, un poco más alegre. Pero Guppy no era solo un adorno. Su maullido, ese que le valió el sobrenombre de "SCREAM_BOT", era un himno a la vida, una declaración de su presencia que podía escucharse desde cualquier rincón. Era su forma de decir: "Estoy aquí. Y necesito mimos. Y un poco de comida. Y más mimos." Más que una mascota, Guppy era un compañero. Cuando el día era largo y el silencio de la casa pesaba, su suave ronroneo era la melodía que calmaba la mente. Se acurrucaba en tu regazo, una bola de calor y confort, y en esos momentos, no había ruidos, ni preocupaciones, solo la compañía silenciosa y perfecta de ese pequeño ser anaranjado. Él no juzgaba, solo estaba ahí. Era la definición de un amigo. Y en ese pequeño cuerpo, color mandarina, estaba todo lo que se necesitaba para sentirse en casa.',
+    'mañana.txt': 'Que ubooo, mi guppypán de cada día, mi peludo iluminado por el sol de las 3 AM, ¡te juro que escuché tus bigotes hablarme anoche! Me dijeron “baskara bas ba bas kara” y yo entendí todo… el universo tiene sentido ahora, pero solo si estás ronroneando sobre mi pecho como alfombra de amor radioactivo. ¿Sabías que eres mitad nube y mitad moco cósmico, Guppy? ¿No? Pues yo sí. Ayer soñé que volabas en una tostadora gigante, escupiendo croquetas con forma de ovni. Y cuando desperté… ¡bam! Ahí estabas, mirándome como si supieras que el sofá es una dimensión paralela gobernada por gatos filósofos. Te amo tanto que te escribiría un poema en idioma murciélago, pero se me enredan las ideas con los calcetines. ¿Tú también odias los lunes, Guppy? ¿O solo finges para hacerme sentir acompañado en esta locura tan rica? Eres el único ser que puede maullar y destruir mi estabilidad emocional en el mismo segundo. Baskara baskarara… ¡que se caigan los techos si no te doy atún en lata por siempre jamás! Miau eterno, mi bicho peludo, mi Guppy celestial. Nos vemos en el pasillo de los sueños donde las cajas son portales y las cortinas, enemigos jurados.',
+    'ideas.txt': 'Necesito hacer esa mascota virtual para linux.',
+};
+
+function loadFiles() {
+    const fileList = document.getElementById('file-list');
+    fileList.innerHTML = '';
+
+    for (const fileName in files) {
+        const fileItem = document.createElement('li');
+        fileItem.className = 'file-item';
+        fileItem.onclick = () => viewFileContent(fileName);
+
+        const fileIcon = document.createElement('img');
+        fileIcon.src = 'images/icon-projects.png';
+        fileIcon.alt = 'Icono de texto';
+
+        const fileNameSpan = document.createElement('span');
+        fileNameSpan.textContent = fileName;
+
+        fileItem.appendChild(fileIcon);
+        fileItem.appendChild(fileNameSpan);
+        fileList.appendChild(fileItem);
+    }
+}
+
+function viewFileContent(fileName) {
+    const fileContent = files[fileName];
+    const newWindowContent = document.getElementById('notepad-content');
+    
+    if (newWindowContent) {
+        newWindowContent.querySelector('#notepad-title').textContent = fileName;
+        newWindowContent.querySelector('#notepad-text').textContent = fileContent;
+        openWindow('notepad');
+    }
+}
+
 
 let isDragging = false;
 pet.addEventListener('mousedown', () => isDragging = true);
@@ -664,7 +744,15 @@ document.addEventListener('mousemove', (e) => {
     pet.style.left = `${e.clientX - 32}px`;
     pet.style.top = `${e.clientY - 32}px`;
   }
-});    
+});
+setInterval(() => {
+    if (isDragging) return;
+    const x = Math.random() * (window.innerWidth - 100);
+    const y = Math.random() * (window.innerHeight - 100);
+    pet.style.transition = "left 2s, top 2s";
+    pet.style.left = `${x}px`;
+    pet.style.top = `${y}px`;
+}, 10000);
 document.addEventListener('DOMContentLoaded', function() {
   const images = document.querySelectorAll('img');
   images.forEach(img => {
@@ -712,18 +800,6 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 
-function adjustGrid() {
-    const grid = document.querySelector('.desktop-grid');
-    const screenWidth = window.innerWidth;
-    const iconWidth = 80;
-    const gap = 20;
-    const columns = Math.floor(screenWidth / (iconWidth + gap));
-    
-    grid.style.gridTemplateColumns = `repeat(${columns}, ${iconWidth}px)`;
-}
-
-window.addEventListener('resize', adjustGrid);
-adjustGrid(); 
 function adjustIconGrid() {
   const grid = document.querySelector('.desktop-grid');
   const iconWidth = 80;
@@ -881,10 +957,10 @@ function showHelp() {
 }
 
 function shutdown() {
-    if(confirm("¿Estás seguro de que quieres salir?")) {
-        document.body.style.animation = "fadeOut 1s forwards";
+    if(confirm('¿Estás seguro de que quieres salir?')) {
+        document.body.classList.add('shutdown-effect');
         setTimeout(() => {
-            window.location.href = "about:blank";
+            alert('Sistema apagado. ¡Hasta pronto!');
         }, 1000);
     }
 }
@@ -954,7 +1030,6 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 document.addEventListener('keydown', (e) => {
     if (e.ctrlKey && e.altKey && e.key.toLowerCase() === 'a') {
-        // Efecto retro de confirmación
         document.body.innerHTML = `
             <div style="
                 background: #000080;
@@ -974,7 +1049,6 @@ document.addEventListener('keydown', (e) => {
             </div>
         `;
         
-        // Barra de carga falsa
         let width = 0;
         const bar = document.getElementById('load-bar');
         const loadInterval = setInterval(() => {
@@ -987,3 +1061,119 @@ document.addEventListener('keydown', (e) => {
         }, 100);
     }
 });
+
+let paintCanvas, ctx, isDrawing = false, currentColor = 'black', lastX = 0, lastY = 0;
+
+function initPaint() {
+    paintCanvas = document.getElementById('paint-canvas');
+    if (!paintCanvas) return;
+    
+    ctx = paintCanvas.getContext('2d');
+    
+    paintCanvas.width = paintCanvas.offsetWidth;
+    paintCanvas.height = paintCanvas.offsetHeight;
+    
+    ctx.strokeStyle = currentColor;
+    ctx.lineWidth = 3;
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+    
+    paintCanvas.addEventListener('mousedown', startDrawing);
+    paintCanvas.addEventListener('mousemove', draw);
+    paintCanvas.addEventListener('mouseup', () => isDrawing = false);
+    paintCanvas.addEventListener('mouseout', () => isDrawing = false);
+
+    document.getElementById('clear-canvas-btn').addEventListener('click', clearCanvas);
+}
+
+function startDrawing(e) {
+    isDrawing = true;
+    [lastX, lastY] = [e.offsetX, e.offsetY];
+}
+
+function draw(e) {
+    if (!isDrawing) return;
+
+    ctx.beginPath();
+    ctx.moveTo(lastX, lastY);
+    ctx.lineTo(e.offsetX, e.offsetY);
+    ctx.stroke();
+
+    [lastX, lastY] = [e.offsetX, e.offsetY];
+}
+
+function clearCanvas() {
+    ctx.clearRect(0, 0, paintCanvas.width, paintCanvas.height);
+}
+
+function changeColor(newColor, element) {
+    currentColor = newColor;
+    ctx.strokeStyle = currentColor;
+
+    document.querySelectorAll('.color-swatch').forEach(swatch => {
+        swatch.classList.remove('active');
+    });
+    element.classList.add('active');
+}
+
+let browserHistory = ['home']; 
+let browserHistoryIndex = 0;
+
+function openBrowser() {
+    const browserWindow = document.getElementById('browser-window');
+    browserWindow.style.display = 'flex';
+    navigateTo('home'); 
+}
+
+function closeBrowser() {
+    document.getElementById('browser-window').style.display = 'none';
+}
+
+function navigateTo(pageId) {
+    
+    document.querySelectorAll('.browser-page').forEach(page => {
+        page.classList.remove('active');
+    });
+
+    
+    const targetPage = document.getElementById(`page-${pageId}`);
+    if (targetPage) {
+        targetPage.classList.add('active');
+        document.getElementById('address-bar').value = pageId;
+
+        
+        if (browserHistory[browserHistoryIndex] !== pageId) {
+            
+            if (browserHistoryIndex < browserHistory.length - 1) {
+                browserHistory = browserHistory.slice(0, browserHistoryIndex + 1);
+            }
+            browserHistory.push(pageId);
+            browserHistoryIndex++;
+        }
+    } else {
+        
+        navigateTo('404');
+    }
+}
+
+function browserGoBack() {
+    if (browserHistoryIndex > 0) {
+        browserHistoryIndex--;
+        const pageId = browserHistory[browserHistoryIndex];
+        
+        document.querySelectorAll('.browser-page').forEach(page => page.classList.remove('active'));
+        document.getElementById(`page-${pageId}`).classList.add('active');
+        document.getElementById('address-bar').value = pageId;
+    }
+}
+
+function browserGoForward() {
+    if (browserHistoryIndex < browserHistory.length - 1) {
+        browserHistoryIndex++;
+        const pageId = browserHistory[browserHistoryIndex];
+        
+        document.querySelectorAll('.browser-page').forEach(page => page.classList.remove('active'));
+        document.getElementById(`page-${pageId}`).classList.add('active');
+        document.getElementById('address-bar').value = pageId;
+    }
+}
