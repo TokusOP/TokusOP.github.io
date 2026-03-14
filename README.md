@@ -53,6 +53,6 @@
 
 ## Créditos
 
-Hecho por **TokusP** — [github.com/TokusP](https://github.com/TokusP)
+Hecho por **TokusP** — [github.com/TokusOP](https://github.com/TokusOP)
 
 Música incluida: *lotus waters* (yume 2kki) · *Waterfall* (Toby Fox) · *Dog* (C418) · *Song of Healing* (Koji Kondo)
