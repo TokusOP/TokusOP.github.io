@@ -14,14 +14,14 @@
             <span class="xp-header-text">Para empezar, haz clic en tu nombre de usuario</span>
             <img src="images/xp-logo.png" alt="Windows XP Logo" class="xp-logo">
         </div>
-        
+
         <div class="xp-user-list">
-            <div class="xp-user" onclick="login('Guppy')">
-                <img src="images/guppy.png" alt="Guppy">
-                <span>Guppy</span>
+            <div class="xp-user" onclick="login('TV-Parasite')">
+                <img src="images/palm.png" alt="TV-Parasite">
+                <span>TV-Parasite</span>
             </div>
         </div>
-        
+
         <div class="xp-footer">
             <div class="xp-buttons">
                 <button class="xp-button" onclick="shutdown()">
@@ -34,7 +34,7 @@
 </div>
 <div class="desktop">
   <div class="wallpaper"></div>
-  
+
   <div class="desktop-icons-container">
     <div class="desktop-grid">
         <div class="icon" onclick="openWindow('home')">
@@ -50,15 +50,24 @@
             <span>Contacto</span>
         </div>
         <div class="icon" onclick="openBrowser()">
-            <img src="images/sunrise.png" alt="Navegador"> 
+            <img src="images/sunrise.png" alt="Navegador">
             <span>Hotline Explorer</span>
         </div>
         <div class="icon" onclick="openWindow('game')">
             <img src="images/icon-game.png" alt="Juego">
-            <span>Juego</span>
+            <span>Snake</span>
         </div>
+        <div class="icon" onclick="openWindow('gallery')">
+            <img src="images/icon-gallery.png" alt="Galería">
+            <span>Galería</span>
+        </div>
+        <div class="icon" onclick="openWindow('messenger')">
+            <img src="images/icon-mensaje.png" alt="TokIM">
+            <span>TokIM</span>
+        </div>
+
         <div class="icon" onclick="openWindow('paint')">
-            <img src="images/icon-paint.png" alt="Paint"> 
+            <img src="images/icon-paint.png" alt="Paint">
             <span>Paint</span>
         </div>
         <div class="icon" onclick="openWindow('terminal')">
@@ -81,8 +90,32 @@
             <img src="images/game.png" alt="Virus.exe">
             <span>Juego.exe</span>
         </div>
+        <div class="icon" onclick="openWindow('trash')">
+            <img src="images/icon-trash.png" alt="Papelera">
+            <span>Papelera</span>
+        </div>
+        <div class="icon" onclick="openWindow('credits')">
+            <img src="images/icon-credits.png" alt="Créditos">
+            <span>Créditos</span>
+        </div>
+        <div class="icon" onclick="openWindow('pet-customizer')">
+            <img src="images/icon-petpet.png" alt="Mascotas" onerror="this.src='images/icon-settings.png'">
+            <span>Mascotas</span>
+        </div>
+        <div class="icon" onclick="openWindow('minesweeper')">
+            <img src="images/icon-game.png" alt="Buscaminas" onerror="this.src='images/icon-settings.png'">
+            <span>Buscaminas</span>
+        </div>
+        <div class="icon" onclick="openWindow('notepad')">
+            <img src="images/icon-projects.png" alt="Bloc de Notas" onerror="this.src='images/icon-settings.png'">
+            <span>Bloc de Notas</span>
+        </div>
+        <div class="icon" onclick="openWindow('taskmanager')">
+            <img src="images/icon-settings.png" alt="Task Manager">
+            <span>Task Manager</span>
+        </div>
     </div>
-  </div>
+
 <div class="taskbar">
     <div class="start-button" id="start-button">
         <img src="images/icon-menu.png" alt="Inicio" class="start-icon">
@@ -90,8 +123,8 @@
     </div>
     <div class="start-menu" id="start-menu">
         <div class="menu-header">
-            <img src="images/guppy.png" alt="Usuario">
-            <span>Guppy</span>
+            <img src="images/palm.png" alt="TV-Parasite">
+            <span>TV-Parasite</span>
         </div>
         <div class="menu-section">
             <div class="menu-item" onclick="openWindow('home')">
@@ -108,7 +141,7 @@
             </div>
         </div>
         <div class="menu-section">
-            <div class="menu-item" onclick="openWindow('terminal')">
+<div class="menu-item" onclick="openWindow('terminal')">
                 <img src="images/icon-terminal.png" alt="Terminal">
                 <span>Terminal</span>
             </div>
@@ -132,189 +165,281 @@
             </div>
         </div>
     </div>
-    <div class="time" id="clock">00:00:00</div>
+    <div id="taskbar-windows"></div>
+    <div class="taskbar-tray">
+        <div class="tray-btn" id="wifi-btn" onclick="toggleWifiPopup(event)" title="Red inalámbrica">
+            <svg width="16" height="14" viewBox="0 0 16 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M8 11.5a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z" fill="currentColor"/>
+                <path d="M4.5 8.5C5.6 7.4 6.7 6.9 8 6.9s2.4.5 3.5 1.6" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+                <path d="M2 5.8C3.8 4 5.8 3 8 3s4.2 1 6 2.8" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+                <path d="M0 3C2.2 1.1 4.9 0 8 0s5.8 1.1 8 3" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+            </svg>
+        </div>
+    </div>
+    <div class="time" id="clock" onclick="toggleCalendar(event)"><span class="clock-time">00:00</span><span class="clock-date">--/--</span></div>
 </div>
 
-        <div class="window" id="main-window">
-            <div class="window-header">
-                <span id="window-title">Bienvenido</span>
-                <div class="window-controls">
-                    <button class="minimize" onclick="closeWindow()">_</button>
-                    <button class="maximize">□</button>
-                    <button class="close" onclick="closeWindow()">X</button>
-                </div>
-            </div>
-            <div class="window-content" id="window-content">
-            </div>
-        </div>
     </div>
 
     <div id="home-content" class="window-template">
-        <h1>Bienvenido a mi sitio</h1>
-        <div class="content-row">
-            <div class="text-content">
-                <p>// Accediendo a la mente de Tokus...</p>
-                <p>ㅤ</p>
-                <p>>> BIOS:</p>
-                <p>> Bienvenido a un rincón olvidado de la red, un santuario digital construido con el resplandor de una pantalla CRT. Esto no es solo un portafolio, es un viaje al interior de un disco duro de los 90, donde cada archivo es un recuerdo y cada glitch es una obra de arte.</p>
-                <p>ㅤ</p>
-                <p>> SOUNDTRACK: Lofi para el alma, breakcore para el caos.</p>
-                <p>ㅤ</p>
-                <p>> AESTHETIC: CRT glow + nostalgia de Windows XP.</p>
-                <p>ㅤ</p>
-                <p>>> SKILLS:</p>
-                <p>Dibujo.exe | Programación.bat | Resetear_para_más_ideas.vbs</p>
-                <p>ㅤ</p>
-                <p>// Presiona [ENTER] para conectar.</p>
+        <div class="retro-page home-page">
+            <div class="retro-page-header">
+                <div class="retro-scanline-title">
+                    <span class="retro-cursor-blink">▌</span>
+                    <span class="retro-title-main">TokusOP</span>
+                    <span class="retro-title-sub">// TokOs v1.0</span>
+                </div>
+                <div class="retro-statusbar-row">
+                    <span class="retro-badge">● ONLINE</span>
+                    <span class="retro-badge">REYKJAVIK, IS</span>
+                    <span class="retro-badge">ENTRETENIMIENTO</span>
+                </div>
             </div>
-            <div class="image-content">
-                <img src="images/tokus.png" alt="Mi foto">
-                <p></p>
-                <img src="images/kittens.png" alt="Mi foto">
-                <p></p>
-                <img src="images/guppy.png" alt="Mi foto">
+            <div class="retro-page-body">
+                <div class="retro-terminal-block">
+                    <div class="retro-block-header">C:\BIOS\README.TXT</div>
+                    <div class="retro-block-body">
+                        <p class="retro-comment">// Accediendo a la mente de TokusOP...</p>
+                        <p>&gt; Bienvenido a un rincón olvidado de la red, un santuario digital construido con el resplandor de una pantalla CRT. Esto no es solo un portafolio, es un viaje al interior de un disco duro de los 90, donde cada archivo es un recuerdo y cada glitch es una obra de arte.</p>
+                        <p class="retro-comment">&gt; SOUNDTRACK: Lofi para el alma, breakcore para el caos.</p>
+                        <p class="retro-comment">&gt; AESTHETIC: CRT glow + nostalgia de Windows XP.</p>
+                        <p class="retro-empty-line">&nbsp;</p>
+                        <p>&gt;&gt; SKILLS:</p>
+                        <div class="retro-skill-row">
+                            <span class="retro-skill-tag">Dibujo.exe</span>
+                            <span class="retro-skill-tag">Programación.bat</span>
+                            <span class="retro-skill-tag">Resetear_ideas.vbs</span>
+                        </div>
+                        <p class="retro-comment">// Presiona [ENTER] para conectar.</p>
+                    </div>
+                </div>
+                <div class="retro-img-column">
+                    <div class="retro-img-frame">
+                        <img src="images/tokus.png" alt="TokusOP">
+                        <div class="retro-img-caption">tokus.png</div>
+                    </div>
+                    <div class="retro-img-frame">
+                        <img src="images/kittens.png" alt="Los Gatitos">
+                        <div class="retro-img-caption">kittens.png</div>
+                    </div>
+                    <div class="retro-img-frame">
+                        <img src="images/guppy.png" alt="Guppy">
+                        <div class="retro-img-caption">guppy.png</div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 <div id="music-player-content" class="window-template">
-    <h1>Reproductor Retro</h1>
-    <div class="music-player">
-
-        <div class="player-display">
-            <div class="player-title" id="now-playing">♪ No hay canción seleccionada ♪</div>
-            <div class="player-visualizer" id="visualizer"></div>
-        </div>
-        
-
-        <div class="player-controls">
-            <button class="player-btn" onclick="prevTrack()">⏮</button>
-            <button class="player-btn" onclick="togglePlay()">▶</button>
-            <button class="player-btn" onclick="nextTrack()">⏭</button>
-            <button class="player-btn" onclick="stopPlayback()">⏹</button>
-        </div>
-        
-
-        <div class="progress-container">
-            <div class="progress-bar" id="progress-bar"></div>
-        </div>
-        
-
-        <div class="volume-control">
-            <span>Volumen:</span>
-            <input type="range" min="0" max="1" step="0.1" value="0.7" id="volume-slider" onchange="changeVolume()">
-        </div>
-        
-
-        <div class="playlist">
-            <h3>Lista de canciones</h3>
-            <ul id="playlist">
-                <li onclick="playSong(0)">1. lotus waters - yume 2kki</li>
-                <li onclick="playSong(1)">2. 031. Waterfall - Toby Fox</li>
-                <li onclick="playSong(2)">3. Dog - C418</li>
-                <li onclick="playSong(3)">4. Song of Healing - Koji Kondo</li>
-            </ul>
+<div class="wa-shell">
+    <div class="wa-top">
+        <div class="wa-logo">WINAMP</div>
+        <div class="wa-marquee-wrap"><div class="wa-marquee" id="wa-marquee">*** Sin canción seleccionada ***</div></div>
+        <div class="wa-time" id="wa-time">0:00 / 0:00</div>
+    </div>
+    <canvas class="wa-viz" id="wa-viz"></canvas>
+    <div class="wa-seek" id="wa-seek-bar" onclick="seekTrack(event)">
+        <div class="wa-seek-fill" id="progress-bar"></div>
+        <div class="wa-seek-thumb" id="wa-seek-thumb"></div>
+    </div>
+    <div class="wa-controls">
+        <button class="wa-btn" onclick="prevTrack()" title="Anterior">⏮</button>
+        <button class="wa-btn wa-btn-play" id="wa-play-btn" onclick="togglePlay()" title="Play/Pausa">▶</button>
+        <button class="wa-btn" onclick="pausePlayback()" title="Pausa">⏸</button>
+        <button class="wa-btn" onclick="stopPlayback()" title="Stop">⏹</button>
+        <button class="wa-btn" onclick="nextTrack()" title="Siguiente">⏭</button>
+        <div class="wa-vol-wrap">
+            <span class="wa-vol-label">VOL</span>
+            <input type="range" class="wa-vol" min="0" max="1" step="0.05" value="0.7" id="volume-slider" oninput="changeVolume()">
         </div>
     </div>
+    <div class="wa-pl-header">
+        <span>PLAYLIST</span>
+        <span class="wa-pl-count" id="wa-pl-count">4 tracks</span>
+    </div>
+    <ul class="wa-playlist" id="playlist">
+        <li class="wa-track" onclick="playSong(0)"><span class="wa-tnum">01</span><span class="wa-tname">lotus waters</span><span class="wa-tartist">yume 2kki</span><span class="wa-tdur">3:24</span></li>
+        <li class="wa-track" onclick="playSong(1)"><span class="wa-tnum">02</span><span class="wa-tname">Waterfall</span><span class="wa-tartist">Toby Fox</span><span class="wa-tdur">2:01</span></li>
+        <li class="wa-track" onclick="playSong(2)"><span class="wa-tnum">03</span><span class="wa-tname">Dog</span><span class="wa-tartist">C418</span><span class="wa-tdur">1:43</span></li>
+        <li class="wa-track" onclick="playSong(3)"><span class="wa-tnum">04</span><span class="wa-tname">Song of Healing</span><span class="wa-tartist">Koji Kondo</span><span class="wa-tdur">3:08</span></li>
+    </ul>
+    <div class="wa-status-bar">
+        <span id="wa-status">■ Detenido</span>
+        <span id="wa-bitrate">128kbps · 44kHz</span>
+    </div>
+</div>
 </div>
     <div id="projects-content" class="window-template">
-        <h1>Mis Proyectos</h1>
-        <div class="project-grid">
-            <div class="project-item" onclick="window.open('https://www.roblox.com/games/113449066161917/14a606', '_blank')">
-                <img src="images/proyecto1.png" alt="Proyecto 1">
-                <h3>14a606</h3>
-                <p>Juego simple de peleas.</p>
+        <div class="retro-page projects-page">
+            <div class="retro-page-header">
+                <div class="retro-scanline-title">
+                    <span class="retro-cursor-blink">▌</span>
+                    <span class="retro-title-main">Proyectos</span>
+                    <span class="retro-title-sub">// C:\PROJECTS\</span>
+                </div>
+                <div class="retro-statusbar-row">
+                    <span class="retro-badge">2 ARCHIVOS</span>
+                    <span class="retro-badge">ROBLOX STUDIO</span>
+                </div>
             </div>
-            <div class="project-item" onclick="window.open('https://www.roblox.com/games/18284261060/Sanctuarium', '_blank')">
-                <img src="images/proyecto2.png" alt="Proyecto 2">
-                <h3>Sanctuarium</h3>
-                <p>Santuario.</p>
+            <div class="retro-page-body retro-page-body-full">
+                <div class="retro-project-grid">
+                    <div class="retro-project-card" onclick="window.open('https://www.roblox.com/games/113449066161917/14a606', '_blank')">
+                        <div class="retro-project-img-wrap">
+                            <img src="images/proyecto1.png" alt="14a606">
+                            <div class="retro-project-overlay">▶ ABRIR</div>
+                        </div>
+                        <div class="retro-project-info">
+                            <div class="retro-project-name">14a606<span class="retro-ext">.exe</span></div>
+                            <div class="retro-project-desc">&gt; Juego simple de peleas.</div>
+                            <div class="retro-project-tags">
+                                <span class="retro-tag">Roblox</span>
+                                <span class="retro-tag">Peleas</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="retro-project-card" onclick="window.open('https://www.roblox.com/games/18284261060/Sanctuarium', '_blank')">
+                        <div class="retro-project-img-wrap">
+                            <img src="images/proyecto2.png" alt="Sanctuarium">
+                            <div class="retro-project-overlay">▶ ABRIR</div>
+                        </div>
+                        <div class="retro-project-info">
+                            <div class="retro-project-name">Sanctuarium<span class="retro-ext">.exe</span></div>
+                            <div class="retro-project-desc">&gt; Santuario.</div>
+                            <div class="retro-project-tags">
+                                <span class="retro-tag">Roblox</span>
+                                <span class="retro-tag">Exploración</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-
         </div>
     </div>
 
 <div id="contact-content" class="window-template">
-    <h1>Contacto Directo</h1>
-    <div class="contact-container">
-        <div class="contact-section">
-            <h2>Escríbeme</h2>
-            <div class="contact-method">
-                <div class="contact-label">Correo electrónico:</div>
-                <a href="mailto:tokuspocus@gmail.com" class="contact-link">Correo Publico</a>
+    <div class="retro-page contact-page">
+        <div class="retro-page-header">
+            <div class="retro-scanline-title">
+                <span class="retro-cursor-blink">▌</span>
+                <span class="retro-title-main">Contacto</span>
+                <span class="retro-title-sub">// C:\CONTACT\DATA.DAT</span>
+            </div>
+            <div class="retro-statusbar-row">
+                <span class="retro-badge">● DISPONIBLE</span>
+                <span class="retro-badge">4 REDES</span>
             </div>
         </div>
-        
-        <div class="contact-section">
-            <h2>Redes Sociales</h2>
-            <div class="contact-method">
-                <div class="contact-label">GitHub:</div>
-                <a href="https://github.com/TokusOP" target="_blank" class="contact-link">github.com/TokusOP</a>
-            </div>
-            <div class="contact-method">
-                <div class="contact-label">Instagram:</div>
-                <a href="https://www.instagram.com/sudo.su99/" target="_blank" class="contact-link">@sudo.su99</a>
-            </div>
-            <div class="contact-method">
-                <div class="contact-label">YouTube:</div>
-                <a href="https://www.youtube.com/@TokusOP" target="_blank" class="contact-link">@TokusOP</a>
-            </div>
-            <div class="contact-method">
-                <div class="contact-label">Steam:</div>
-                <a href="https://steamcommunity.com/id/TokusOP/" target="_blank" class="contact-link">TokusOP</a>
+        <div class="retro-page-body retro-page-body-full">
+            <div class="retro-contact-grid">
+                <div class="retro-contact-block">
+                    <div class="retro-block-header">C:\MAIL\DIRECT.TXT</div>
+                    <div class="retro-block-body">
+                        <div class="retro-contact-row">
+                            <span class="retro-contact-icon">✉</span>
+                            <div>
+                                <div class="retro-contact-label">Correo electrónico</div>
+                                <a href="/cdn-cgi/l/email-protection#f98d96928c8a89969a8c8ab99e94989095d79a9694" class="retro-contact-link">Correo Público</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="retro-contact-block">
+                    <div class="retro-block-header">C:\REDES\SOCIAL.LOG</div>
+                    <div class="retro-block-body">
+                        <div class="retro-contact-row">
+                            <span class="retro-contact-icon">⌂</span>
+                            <div>
+                                <div class="retro-contact-label">GitHub</div>
+                                <a href="https://github.com/TokusOP" target="_blank" class="retro-contact-link">github.com/TokusOP</a>
+                            </div>
+                        </div>
+                        <div class="retro-contact-row">
+                            <span class="retro-contact-icon">◈</span>
+                            <div>
+                                <div class="retro-contact-label">Instagram</div>
+                                <a href="https://www.instagram.com/sudo.su99/" target="_blank" class="retro-contact-link">@sudo.su99</a>
+                            </div>
+                        </div>
+                        <div class="retro-contact-row">
+                            <span class="retro-contact-icon">▶</span>
+                            <div>
+                                <div class="retro-contact-label">YouTube</div>
+                                <a href="https://www.youtube.com/@TokusOP" target="_blank" class="retro-contact-link">@TokusOP</a>
+                            </div>
+                        </div>
+                        <div class="retro-contact-row">
+                            <span class="retro-contact-icon">◉</span>
+                            <div>
+                                <div class="retro-contact-label">Steam</div>
+                                <a href="https://steamcommunity.com/id/TokusOP/" target="_blank" class="retro-contact-link">TokusOP</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
-    <div id="game-content" class="window-template">
-    <h1>Snake Retro</h1>
-    <div class="game-container">
-        <canvas id="game-canvas" width="400" height="400"></canvas>
-        <div class="game-controls">
-            <p>Puntuación: <span id="score">0</span></p>
-            <button onclick="startGame()">Comenzar</button>
-            <p>Controles: Flechas del teclado</p>
+<div id="game-content" class="window-template">
+    <div class="snake-shell">
+        <div class="snake-hud">
+            <div class="snake-hud-score">
+                <span class="snake-label">SCORE</span>
+                <span class="snake-score-val" id="score">0</span>
+            </div>
+            <div class="snake-title-wrap">
+                <span class="snake-title-text">SNAKE</span>
+            </div>
+            <div class="snake-hud-hi">
+                <span class="snake-label">BEST</span>
+                <span class="snake-score-val" id="snake-best">0</span>
+            </div>
+        </div>
+        <div class="snake-arena">
+            <canvas id="game-canvas"></canvas>
+        </div>
+        <div class="snake-footer">
+            <button class="snake-btn" onclick="startGame()">▶ NUEVO JUEGO</button>
+            <span class="snake-hint">WASD / ← ↑ → ↓</span>
+            <button class="snake-btn" onclick="pauseGame()">⏸ PAUSA</button>
         </div>
     </div>
 </div>
 <div id="terminal-content" class="window-template">
-    <h1>Terminal v1.0</h1>
     <div class="terminal-container">
-        <div class="terminal-header">
-            <span>TERMINAL.EXE</span>
-            <div class="terminal-controls">
-            </div>
-        </div>
         <div class="terminal-body" id="terminal-output">
-            <p>TokOs v1.0</p>
-            <p>Escribe "help" para ver los comandos disponibles</p>
-            <p>> <span class="cursor" id="cursor">_</span></p>
+            <p class="term-welcome">TokOs Terminal v1.0 — Escribe <span class="term-cmd">help</span> para empezar</p>
         </div>
-        <input type="text" class="terminal-input" id="terminal-input" 
-               placeholder="Escribe un comando..." autocomplete="off"
-               onkeydown="handleTerminalInput(event)">
+        <div class="terminal-input-row">
+            <span class="term-prompt">C:\&gt;</span>
+            <input type="text" class="terminal-input" id="terminal-input"
+                   placeholder="" autocomplete="off"
+                   onkeydown="handleTerminalInput(event)">
+        </div>
     </div>
 </div>
 <div id="settings-content" class="window-template">
     <h1>Configuración del Sistema</h1>
-    
+
     <div class="settings-tabs">
         <button class="tab-button active" onclick="openTab('tab-user')">Usuario</button>
         <button class="tab-button" onclick="openTab('tab-display')">Pantalla</button>
-        <button class="tab-button" onclick="openTab('tab-performance')">Rendimiento</button>
+        <button class="tab-button" onclick="openTab('tab-screensaver')">Salvapantallas</button>
     </div>
-    
+
     <div class="tab-content" id="tab-user">
         <div class="user-profile">
-            <img src="images/guppy.png" alt="Guppy" class="user-avatar">
+            <img src="images/palm.png" alt="TV-Parasite" class="user-avatar">
             <div class="user-info">
-                <h2>Guppy</h2>
+                <h2>TV-Parasite</h2>
                 <p>Usuario Administrador</p>
                 <p>Miembro desde: 1995</p>
             </div>
         </div>
         <button class="retro-button" onclick="changePassword()">Cambiar Contraseña</button>
     </div>
-    
+
     <div class="tab-content" id="tab-display" style="display:none">
         <div class="setting-item">
             <label>Modo Oscuro:</label>
@@ -323,7 +448,7 @@
                 <span class="slider"></span>
             </label>
         </div>
-        
+
         <div class="setting-item">
             <label>Fondo de Pantalla:</label>
             <select id="wallpaper-select" class="retro-dropdown">
@@ -334,7 +459,7 @@
             </select>
             <button class="retro-button" onclick="applyWallpaper()">Aplicar</button>
         </div>
-        
+
         <div class="setting-item">
             <label>Resolución:</label>
             <select class="retro-dropdown">
@@ -344,65 +469,128 @@
             </select>
         </div>
     </div>
-    
-    <div class="tab-content" id="tab-performance" style="display:none">
-        <h3>Administrador de Tareas</h3>
-        <div class="performance-meters">
-            <div class="meter">
-                <label>Uso de CPU:</label>
-                <div class="meter-bar">
-                    <div class="meter-fill" id="cpu-meter" style="width: 23%">23%</div>
-                </div>
-            </div>
-            <div class="meter">
-                <label>Uso de RAM:</label>
-                <div class="meter-bar">
-                    <div class="meter-fill" id="ram-meter" style="width: 65%">65%</div>
-                </div>
-            </div>
-            <div class="meter">
-                <label>Disco (C:):</label>
-                <div class="meter-bar">
-                    <div class="meter-fill" id="disk-meter" style="width: 42%">42%</div>
-                </div>
-            </div>
+
+    <div class="tab-content" id="tab-screensaver" style="display:none">
+        <div class="setting-item">
+            <label>Activar:</label>
+            <label class="retro-switch">
+                <input type="checkbox" id="screensaver-enabled" onchange="toggleScreensaverSetting()">
+                <span class="slider"></span>
+            </label>
         </div>
-        
-        <div class="process-list">
-            <h4>Procesos Activos:</h4>
-            <ul>
-                <li>winfile.exe <span>12% CPU</span></li>
-                <li>sol.exe <span>8% CPU</span></li>
-            </ul>
+        <div class="setting-item">
+            <label>Tiempo:</label>
+            <select id="screensaver-timeout" class="retro-dropdown" onchange="updateScreensaverTimeout()">
+                <option value="30000">30 segundos</option>
+                <option value="60000" selected>1 minuto</option>
+                <option value="180000">3 minutos</option>
+                <option value="300000">5 minutos</option>
+            </select>
         </div>
-        
-        <button class="retro-button danger" onclick="endProcess()">Finalizar Proceso</button>
+        <div class="setting-item" style="flex-direction:column;align-items:flex-start;gap:10px;">
+            <label>Tipo de salvapantallas:</label>
+            <div class="ss-preset-grid">
+                <div class="ss-preset-card active" id="ss-preset-stars" onclick="selectSSPreset('stars',this)">
+                    <div class="ss-preview ss-prev-stars">
+                        <span>★ ✦ ★</span>
+                    </div>
+                    <div class="ss-preset-name">Estrellas</div>
+                </div>
+                <div class="ss-preset-card" id="ss-preset-matrix" onclick="selectSSPreset('matrix',this)">
+                    <div class="ss-preview ss-prev-matrix">
+                        <span>01101<br>10010</span>
+                    </div>
+                    <div class="ss-preset-name">Código Matrix</div>
+                </div>
+                <div class="ss-preset-card" id="ss-preset-pipes" onclick="selectSSPreset('pipes',this)">
+                    <div class="ss-preview ss-prev-pipes">
+                        <span>┌─┐<br>│ │<br>└─┘</span>
+                    </div>
+                    <div class="ss-preset-name">Tuberías 3D</div>
+                </div>
+            </div>
+            <button class="retro-button" onclick="previewScreensaver()">▶ Vista previa</button>
+        </div>
     </div>
 </div>
 <div id="eastereggs-content" class="window-template">
-    <h1>Comandos Secretos de Terminal</h1>
-    <div class="content-row">
-        <ul id="easteregg-list">
-        </ul>
+    <div class="xp-help-layout">
+        <div class="xp-help-sidebar">
+            <div class="xp-help-sidebar-header">
+                <img src="images/icon-secret.png" alt="" style="width:24px;height:24px;" onerror="this.style.display='none'">
+                <span>Comandos ocultos</span>
+            </div>
+            <div class="xp-help-sidebar-body">
+                <p>Estos comandos especiales están disponibles en la Terminal.</p>
+                <hr class="xp-hr">
+                <p>Para usarlos, abre la <b>Terminal</b> y escribe el nombre del comando.</p>
+                <hr class="xp-hr">
+                <p class="xp-hint-text">¿Sabías que hay una contraseña secreta?</p>
+            </div>
+        </div>
+        <div class="xp-help-content">
+            <div class="xp-help-title">
+                <img src="images/icon-terminal.png" alt="" style="width:20px;height:20px;" onerror="this.style.display='none'">
+                Comandos Secretos de Terminal
+            </div>
+            <table class="xp-cmd-table" id="easteregg-list">
+            </table>
+            <div class="xp-achievements-section">
+                <div class="xp-achievements-section-title">
+                    <span>🏆</span>
+                    Logros Desbloqueables
+                </div>
+                <div class="xp-achievements-grid" id="achievements-grid">
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 <div id="explorer-content" class="window-template">
-    <h1>Explorador de Archivos</h1>
     <div class="file-explorer-toolbar">
-        <button class="retro-button" onclick="loadFiles()">Actualizar</button>
+        <button class="retro-button" style="font-size:11px;padding:2px 8px;" onclick="loadFiles()">↺ Actualizar</button>
+        <span style="font-size:11px;color:#444;">│</span>
+        <span style="font-size:11px;color:#333;">📁 C:\Usuarios\TV-Parasite\</span>
     </div>
-    <div class="file-list-container">
-        <ul id="file-list"></ul>
+    <div class="file-explorer-body">
+        <div class="file-explorer-sidebar">
+            <h4>Lugares</h4>
+            <div class="sidebar-item" onclick="loadFiles()">
+                <img src="images/icon-explorer.png" alt="">
+                <span>Mis documentos</span>
+            </div>
+            <div class="sidebar-item" style="opacity:0.5;cursor:default;">
+                <img src="images/icon-home.png" alt="">
+                <span>Escritorio</span>
+            </div>
+        </div>
+        <div style="display:flex;flex-direction:column;flex:1;overflow:hidden;">
+            <div class="file-list-container" style="flex:1;">
+                <div class="explorer-list-header">
+                    <span>Nombre</span><span>Tipo</span><span>Modificado</span><span>Tamaño</span>
+                </div>
+                <ul id="file-list"></ul>
+            </div>
+            <div class="file-explorer-statusbar">
+                <span id="explorer-status">0 objetos</span>
+            </div>
+        </div>
     </div>
 </div>
 <div id="notepad-content" class="window-template">
-    <div class="notepad-header">
-        <span id="notepad-title"></span>
+    <div class="notepad-toolbar">
+        <span id="notepad-filename" class="notepad-filename-label">Sin título.txt</span>
+        <button class="notepad-save-btn" onclick="notepadSave()">💾 Guardar .txt</button>
+        <button class="notepad-clear-btn" onclick="notepadClear()">🗑 Nuevo</button>
     </div>
-    <div class="notepad-content" id="notepad-text"></div>
+    <textarea id="notepad-textarea" class="notepad-textarea" spellcheck="false" placeholder="Escribe aquí..."></textarea>
+    <div class="notepad-statusbar">
+        <span id="notepad-charcount">0 caracteres</span>
+        <span id="notepad-linecount">Línea 1, Col 1</span>
+    </div>
 </div>
 <div id="desktop-pet" onclick="playPetSound()">
-  <img src="images/pet.png" alt="Mascota Virtual" id="pet-image">
+  <img src="images/pet-guppy.png" alt="Guppy" id="pet-image">
   <div id="pet-speech-bubble" class="speech-bubble"></div>
 </div>
 
@@ -410,31 +598,73 @@
 <audio id="pet-sound" src="sounds/pet.mp3"></audio>
 <div id="paint-content" class="window-template">
     <div class="paint-toolbar">
-        <div class="color-palette">
-            <div class="color-swatch active" style="background-color: black;" onclick="changeColor('black', this)"></div>
-            <div class="color-swatch" style="background-color: red;" onclick="changeColor('red', this)"></div>
-            <div class="color-swatch" style="background-color: green;" onclick="changeColor('green', this)"></div>
-            <div class="color-swatch" style="background-color: blue;" onclick="changeColor('blue', this)"></div>
-            <div class="color-swatch" style="background-color: yellow;" onclick="changeColor('yellow', this)"></div>
-            <div class="color-swatch" style="background-color: white;" onclick="changeColor('white', this)"></div>
+        <div class="paint-tools-row">
+            <div class="paint-tool-group">
+                <span class="paint-group-label">Pincel</span>
+                <button class="paint-tool-btn active" data-brush="round" onclick="changeBrush('round',this)" title="Redondo">●</button>
+                <button class="paint-tool-btn" data-brush="square" onclick="changeBrush('square',this)" title="Cuadrado">■</button>
+                <button class="paint-tool-btn" data-brush="spray" onclick="changeBrush('spray',this)" title="Spray">⊹</button>
+                <button class="paint-tool-btn" data-brush="calligraphy" onclick="changeBrush('calligraphy',this)" title="Caligrafía">✒</button>
+                <button class="paint-tool-btn" data-brush="eraser" onclick="changeBrush('eraser',this)" title="Borrador">◻</button>
+            </div>
+            <div class="paint-tool-group">
+                <span class="paint-group-label">Grosor</span>
+                <input type="range" id="brush-size" min="1" max="40" value="4" oninput="changeBrushSize(this.value)" style="width:80px;">
+                <span id="brush-size-label" style="font-size:11px;min-width:24px;">4px</span>
+            </div>
+            <div class="paint-tool-group">
+                <span class="paint-group-label">Opacidad</span>
+                <input type="range" id="brush-opacity" min="0.05" max="1" step="0.05" value="1" oninput="changeBrushOpacity(this.value)" style="width:60px;">
+            </div>
+            <button class="retro-button" id="clear-canvas-btn" style="margin-left:auto;">🗑 Limpiar</button>
+            <button class="retro-button" id="save-canvas-btn" onclick="saveCanvas()" style="margin-left:4px;">💾 Guardar</button>
         </div>
-        <button class="retro-button" id="clear-canvas-btn">Limpiar</button>
+        <div class="color-palette-row">
+            <div class="current-color-preview" id="current-color-preview"></div>
+            <div class="color-palette">
+                <div class="color-swatch active" style="background:#000000" onclick="changeColor('#000000',this)"></div>
+                <div class="color-swatch" style="background:#ffffff" onclick="changeColor('#ffffff',this)"></div>
+                <div class="color-swatch" style="background:#7f7f7f" onclick="changeColor('#7f7f7f',this)"></div>
+                <div class="color-swatch" style="background:#c3c3c3" onclick="changeColor('#c3c3c3',this)"></div>
+                <div class="color-swatch" style="background:#880015" onclick="changeColor('#880015',this)"></div>
+                <div class="color-swatch" style="background:#ff0000" onclick="changeColor('#ff0000',this)"></div>
+                <div class="color-swatch" style="background:#ff7f27" onclick="changeColor('#ff7f27',this)"></div>
+                <div class="color-swatch" style="background:#ffca18" onclick="changeColor('#ffca18',this)"></div>
+                <div class="color-swatch" style="background:#fff200" onclick="changeColor('#fff200',this)"></div>
+                <div class="color-swatch" style="background:#22b14c" onclick="changeColor('#22b14c',this)"></div>
+                <div class="color-swatch" style="background:#00a2e8" onclick="changeColor('#00a2e8',this)"></div>
+                <div class="color-swatch" style="background:#3f48cc" onclick="changeColor('#3f48cc',this)"></div>
+                <div class="color-swatch" style="background:#a349a4" onclick="changeColor('#a349a4',this)"></div>
+                <div class="color-swatch" style="background:#ff80c0" onclick="changeColor('#ff80c0',this)"></div>
+                <div class="color-swatch" style="background:#b5734a" onclick="changeColor('#b5734a',this)"></div>
+                <div class="color-swatch" style="background:#c8ffc8" onclick="changeColor('#c8ffc8',this)"></div>
+                <div class="color-swatch" style="background:#99d9ea" onclick="changeColor('#99d9ea',this)"></div>
+                <div class="color-swatch" style="background:#7092be" onclick="changeColor('#7092be',this)"></div>
+                <div class="color-swatch" style="background:#ffe4b8" onclick="changeColor('#ffe4b8',this)"></div>
+                <div class="color-swatch" style="background:#ffd5e5" onclick="changeColor('#ffd5e5',this)"></div>
+            </div>
+            <input type="color" id="custom-color" onchange="changeColor(this.value, null)" title="Color personalizado" style="width:28px;height:28px;padding:1px;border:1px solid #808080;cursor:pointer;">
+        </div>
     </div>
     <canvas id="paint-canvas"></canvas>
 </div>
-<div id="browser-window" class="window" style="display: none;">
-    <div class="window-header">
-        <span id="browser-title">Tokus Explorer</span>
-        <div class="window-controls">
-            <button class="close" onclick="closeBrowser()">X</button>
+<div id="browser-content" class="window-template">
+    <div class="hx-toolbar">
+        <div class="hx-toolbar-top">
+            <div class="hx-nav-btns">
+                <button class="hx-btn" onclick="browserGoBack()" title="Atrás">&#9664;</button>
+                <button class="hx-btn" onclick="browserGoForward()" title="Adelante">&#9654;</button>
+                <button class="hx-btn" onclick="navigateTo('home')" title="Inicio">🏠</button>
+                <button class="hx-btn" onclick="navigateTo(browserHistory[browserHistoryIndex])" title="Recargar">↻</button>
+            </div>
+            <div class="hx-address-bar">
+                <span class="hx-protocol">tokus://</span>
+                <input type="text" id="address-bar" value="home" readonly>
+                <button class="hx-go-btn" onclick="navigateTo(document.getElementById('address-bar').value)">Ir</button>
+            </div>
         </div>
-    </div>
-    <div class="browser-toolbar">
-        <button onclick="browserGoBack()">◄</button>
-        <button onclick="browserGoForward()">►</button>
-        <button onclick="navigateTo('home')">⌂</button> <div class="address-bar-container">
-            <span class="protocol">tokus://</span>
-            <input type="text" id="address-bar" value="home" readonly>
+        <div class="hx-menu-bar">
+            <span>Archivo</span><span>Edición</span><span>Ver</span><span>Favoritos</span><span>Herramientas</span><span>Ayuda</span>
         </div>
     </div>
     <div class="browser-content">
@@ -458,52 +688,727 @@
                         <div class="shortcut-icon" style="background-color: #800000;">!</div>
                         <span>???</span>
                     </div>
+                    <div class="shortcut" onclick="navigateTo('miimaker')">
+                        <div class="shortcut-icon" style="background: linear-gradient(135deg,#ff9de2,#c084fc);">✦</div>
+                        <span>TokusStudio</span>
+                    </div>
+
                 </div>
             </div>
         </div>
 
         <div id="page-youtube" class="browser-page">
-            <div class="youtube-header">
-                <img src="images/tuxtube-icon.png" alt="logo" style="width: 40px; height: 40px;">
-                <h1>TuxTube</h1>
-            </div>
+    <div class="youtube-header">
+        <img src="images/tuxtube-icon.png" alt="logo" class="youtube-logo-img">
+        <h1 class="youtube-logo-text">Tux<span>Tube</span></h1>
+        <div class="youtube-search">
+            <input type="text" placeholder="Buscar" value="duende bailando wachiturro">
+            <button>Buscar</button>
+        </div>
+        <div class="youtube-user">
+            <span>machine25 ▼</span>
+        </div>
+    </div>
+
+    <div class="youtube-container">
+        <div class="youtube-main">
             <div class="video-player-container">
-                <h2>duende bailando wachiturro</h2>
-                <video controls width="100%">
+                <video controls>
                     <source src="images/videoplayback.mp4" type="video/mp4">
                     Tu navegador no soporta el tag de video.
                 </video>
-                <div class="video-info">
-                    <p>64,827 vistas • 12 sept 2011</p>
-                    <p>valdivia</p>
+            </div>
+
+            <div class="video-title-section">
+                <h2>duende bailando wachiturro</h2>
+                <div class="video-stats">
+                    <span>64,827 vistas</span>
+                    <span>•</span>
+                    <span>12 sept 2011</span>
+                </div>
+
+                <div class="video-actions">
+                    <button class="youtube-btn">👍 342</button>
+                    <button class="youtube-btn">👎 12</button>
+                    <button class="youtube-btn">⭐ Añadir a Favoritos</button>
+                    <button class="youtube-btn">📤 Compartir</button>
+                    <button class="youtube-btn">📋 Guardar</button>
+                </div>
+            </div>
+
+            <div class="channel-info">
+                <img src="images/pfp_tokusop.png" alt="channel" class="channel-avatar">
+                <div class="channel-details">
+                    <div class="channel-name">TokusOP <span class="verified">✓</span></div>
+                    <div class="channel-subs">26 suscriptores</div>
+                    <div class="channel-desc"> </div>
+                </div>
+                <button class="subscribe-btn">SUSCRIBIRME</button>
+            </div>
+
+            <div class="comments-section">
+                <h3>Comentarios 24</h3>
+
+                <div class="comment">
+                    <img src="images/guppy.png" alt="user" class="comment-avatar">
+                    <div class="comment-content">
+                        <div class="comment-author">GuppyCat <span class="comment-time">Hace 3 días</span></div>
+                        <div class="comment-text">MIAU MIAU MIAU 🐱</div>
+                        <div class="comment-actions">👍 7 👎 Responder</div>
+                    </div>
+                </div>
+
+                <div class="comment">
+                    <img src="images/snake.png" alt="user" class="comment-avatar">
+                    <div class="comment-content">
+                        <div class="comment-author">xX_SnakePlays_Xx <span class="comment-time">Hace 1 semana</span></div>
+                        <div class="comment-text">jajajajaja wachiturro 2011 nunca olvido</div>
+                        <div class="comment-actions">👍 23 👎 Responder</div>
+                    </div>
+                </div>
+
+                <div class="comment">
+                    <img src="images/retro.png" alt="user" class="comment-avatar">
+                    <div class="comment-content">
+                        <div class="comment-author">RetroGamer_99 <span class="comment-time">Hace 2 semanas</span></div>
+                        <div class="comment-text">esto es arte, vuelvan los wachiturros</div>
+                        <div class="comment-actions">👍 56 👎 Responder</div>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <div id="page-geocities" class="browser-page">
-            <div class="geocities-content">
-                <h1 class="geo-title">~~Bienvenido al Cyber-Espacio de Tokus~~</h1>
-                <img src="images/blood3.gif" alt="En construcción">
-                <p class="geo-text">
-                    ¡Hola, viajero de la red! Has encontrado mi humilde morada digital.
-                    Este sitio está optimizado para Netscape Navigator 4.0.
-                </p>
-                <marquee>*** ¡Gracias por tu visita! ***</marquee>
-                <a href="#" onclick="navigateTo('youtube')">Mira mi video favorito</a>
+        <div class="youtube-sidebar">
+            <h3>Videos recomendados</h3>
+
+            <div class="recommended-video">
+                <div class="rec-thumbnail" style="background: #2a6f97;">XD</div>
+                <div class="rec-info">
+                    <div class="rec-title">COMO BAILAR WACHITURRO TUTORIAL</div>
+                    <div class="rec-channel">Wachiturros Oficial</div>
+                    <div class="rec-views">156k vistas</div>
+                </div>
+            </div>
+
+            <div class="recommended-video">
+                <div class="rec-thumbnail" style="background: #6a4e3a;">🐍</div>
+                <div class="rec-info">
+                    <div class="rec-title">SNAKE GAMEPLAY 1 HORA (mejor puntuación)</div>
+                    <div class="rec-channel">RetroGames</div>
+                    <div class="rec-views">89k vistas</div>
+                </div>
+            </div>
+
+            <div class="recommended-video">
+                <div class="rec-thumbnail" style="background: #4a6f8a;">🐱</div>
+                <div class="rec-info">
+                    <div class="rec-title">Guppy muerde cable - FULL HD</div>
+                    <div class="rec-channel">Cats Channel</div>
+                    <div class="rec-views">23k vistas</div>
+                </div>
+            </div>
+
+            <div class="recommended-video">
+                <div class="rec-thumbnail" style="background: #8a6f4a;">💿</div>
+                <div class="rec-info">
+                    <div class="rec-title">Windows XP sonidos originales</div>
+                    <div class="rec-channel">Nostalgia OS</div>
+                    <div class="rec-views">340k vistas</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="page-geocities" class="browser-page">
+    <div class="geocities-content">
+        <div style="text-align: center; margin-bottom: 10px;">
+            <span style="color: yellow; display: block;">Eres el visitante 00048623</span>
+        </div>
+
+        <img src="images/blood3.gif" alt="En construcción" style="max-width: 100%; margin: 10px 0;">
+
+
+        <h1 class="geo-title">~~BIENVENIDO A MI HUMILDE MORADA DIGITAL~~</h1>
+
+        <div class="geo-divider">
+            ════════════════════
+        </div>
+
+        <p class="geo-text">
+            ✧ Hola, viajero de la red! Has encontrado mi página web personal en GeoCities ✧<br>
+            <span style="font-size: 10px;">Mi barrio es: /Tijuana/Barrio_Libre/5842</span>
+        </p>
+
+        <table style="width: 100%; border: 2px solid #ff00ff; margin: 15px 0; background: #000088;">
+            <tr style="background: #aa00aa;">
+                <th colspan="2" style="color: yellow; padding: 5px;">☼ ENLACES RECOMENDADOS ☼</th>
+            </tr>
+            <tr>
+                <td style="width: 50%; padding: 5px; border: 1px solid #ff00ff;">
+                    <a href="#" onclick="navigateTo('youtube')" style="color: #ffff00;">▶ Ver mi video favorito</a>
+                </td>
+                <td style="padding: 5px; border: 1px solid #ff00ff;">
+                    <a href="#" onclick="navigateTo('home')" style="color: #ffff00;">🏠 Volver al inicio</a>
+                </td>
+            </tr>
+        </table>
+
+
+        <marquee scrollamount="3" behavior="alternate" style="color: #ff00ff; font-size: 14px; margin: 15px 0;">
+            ★ ★ ★ Gracias por visitar mi página, ¡vuelve pronto! ★ ★ ★
+        </marquee>
+
+        <div style="color: #aaa; font-size: 9px; margin-top: 20px;">
+            Última actualización: 23/09/1998<br>
+            Optimizado para 800x600
+        </div>
+    </div>
+</div>
+<div id="page-404" class="browser-page">
+    <div class="error-404-container" style="background: #FFFFF0; color: #800000; border: 2px solid #D9BFB7; padding: 20px; font-family: 'Times New Roman', serif;">
+
+
+        <div style="border-bottom: 2px solid #800000; margin-bottom: 20px;">
+            <h1 style="color: #FF0000; font-size: 28px; margin: 0;">404 - File Not Found</h1>
+            <p style="color: #666; font-size: 14px;">/b/ - Random</p>
+        </div>
+
+
+        <div style="background: #F0E0D0; padding: 5px; border: 1px solid #D9BFB7; margin-bottom: 15px; font-family: 'Courier New';">
+            [ <a href="#" onclick="navigateTo('home')" style="color: #800000;">Inicio</a> ]
+            [ <a href="#" onclick="navigateTo('geocities')" style="color: #800000;">GeoCities</a> ]
+            [ <a href="#" onclick="navigateTo('youtube')" style="color: #800000;">TuxTube</a> ]
+            [ <a href="#" onclick="history.back()" style="color: #800000;">Volver</a> ]
+        </div>
+
+
+        <div style="background: #F5E5D5; border: 1px solid #D9BFB7; padding: 15px; margin-bottom: 15px;">
+            <div style="color: #117743; font-weight: bold; margin-bottom: 5px;">Anonymous</div>
+            <div style="color: #800000; font-size: 13px; margin-bottom: 5px;">ID: b3a7f1d9</div>
+            <div style="color: #800000; font-size: 15px; margin: 10px 0;">
+                >Intentas acceder a una página que no existe<br>
+                >Te encuentras con esto en su lugar
+            </div>
+
+
+            <pre style="font-size: 10px; color: #800000; margin: 15px 0;">
+    ▄▄▄▄▄▄▄▄▄▄▄  ▄▄▄▄▄▄▄▄▄▄▄  ▄▄▄▄▄▄▄▄▄▄▄  ▄▄▄▄▄▄▄▄▄▄▄
+   ▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌
+   ▐░█▀▀▀▀▀▀▀▀▀ ▐░█▀▀▀▀▀▀▀█░▌▐░█▀▀▀▀▀▀▀▀▀ ▐░█▀▀▀▀▀▀▀▀▀
+   ▐░▌          ▐░▌       ▐░▌▐░▌          ▐░▌
+   ▐░▌          ▐░█▄▄▄▄▄▄▄█░▌▐░█▄▄▄▄▄▄▄▄▄ ▐░█▄▄▄▄▄▄▄▄▄
+   ▐░▌          ▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌
+   ▐░▌          ▐░█▀▀▀▀▀▀▀█░▌ ▀▀▀▀▀▀▀▀▀█░▌ ▀▀▀▀▀▀▀▀▀█░▌
+   ▐░▌          ▐░▌       ▐░▌          ▐░▌          ▐░▌
+   ▐░█▄▄▄▄▄▄▄▄▄ ▐░▌       ▐░▌ ▄▄▄▄▄▄▄▄▄█░▌ ▄▄▄▄▄▄▄▄▄█░▌
+   ▐░░░░░░░░░░░▌▐░▌       ▐░▌▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌
+    ▀▀▀▀▀▀▀▀▀▀▀  ▀         ▀  ▀▀▀▀▀▀▀▀▀▀▀  ▀▀▀▀▀▀▀▀▀▀▀
+            </pre>
+
+            <div style="color: #800000;">
+                <span style="color: #117743;">></span> El archivo que buscas fue borrado o nunca existió<br>
+                <span style="color: #117743;">></span> Como tus posts en /b/<br>
+                <span style="color: #117743;">></span> ( ͡° ͜ʖ ͡°)
             </div>
         </div>
 
-        <div id="page-404" class="browser-page">
-            <div class="error-404-container">
-                <h1 class="error-title">404 - Not Found</h1>
-                <p class="error-text">No sé qué esperabas encontrar aquí, pero no es esto.</p>
-                <p class="error-subtext">(´・ω・`)</p>
-                <a href="#" onclick="navigateTo('home')">Vuelve al inicio</a>
+
+        <div style="margin-top: 20px;">
+            <div style="color: #800000; font-weight: bold; margin-bottom: 10px;">Hilos relacionados:</div>
+
+            <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+                <div style="border: 1px solid #D9BFB7; padding: 10px; background: #F5E5D5; width: 150px;">
+                    <div style="color: #117743;">>>8742632</div>
+                    <div>¿Alguien tiene el video del duende?</div>
+                    <div style="color: #666;">Resp: 47</div>
+                </div>
+
+                <div style="border: 1px solid #D9BFB7; padding: 10px; background: #F5E5D5; width: 150px;">
+                    <div style="color: #117743;">>>8742633</div>
+                    <div>Guppy thread ☕</div>
+                    <div style="color: #666;">Resp: 289</div>
+                </div>
+
+                <div style="border: 1px solid #D9BFB7; padding: 10px; background: #F5E5D5; width: 150px;">
+                    <div style="color: #117743;">>>8742634</div>
+                    <div>/v/ - Retro Games</div>
+                    <div style="color: #666;">Resp: 156</div>
+                </div>
+            </div>
+        </div>
+
+
+        <div style="border-top: 1px solid #D9BFB7; margin-top: 20px; padding-top: 10px; font-size: 10px; color: #666;">
+            <div>[] No se admiten peticiones de material con derechos de autor</div>
+            <div>[] Prohibido el contenido ilegal</div>
+            <div>[] No hacer spam</div>
+            <div>[] Los moderadores son dioses</div>
+            <div style="margin-top: 5px;">- ¡Vuelve cuando quieras, forastero! -</div>
+        </div>
+
+
+        <div style="margin-top: 15px;">
+            <textarea rows="3" style="width: 100%; background: #F5E5D5; border: 1px solid #D9BFB7; color: #800000; padding: 5px;" placeholder="Comentario..."></textarea>
+            <div style="display: flex; gap: 10px; margin-top: 5px;">
+                <input type="text" placeholder="Nombre" style="background: #F5E5D5; border: 1px solid #D9BFB7;">
+                <button style="background: #E0D0C0; border: 1px solid #800000; padding: 2px 15px; cursor: pointer;">Enviar</button>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div id="page-miimaker" class="browser-page mii-root">
+
+    <div class="mii-page-header">
+        <div class="mii-page-header-left">
+            <span class="mii-page-logo">✦ TokusStudio</span>
+            <span class="mii-page-tagline">Editor de Personajes</span>
+        </div>
+        <a class="mii-page-back" onclick="navigateTo('home');return false;" href="javascript:void(0)">← Volver al inicio</a>
+    </div>
+
+    <div class="mii-page-body">
+
+
+        <div class="mii-col-preview">
+            <div class="mii-card mii-preview-card">
+                <div class="mii-card-title">Vista previa</div>
+                <div class="mii-avatar-stage">
+
+                    <img class="mii-layer mii-layer-base"    src="images/base1.png" alt="base">
+                    <img class="mii-layer mii-layer-clothes" src="" alt="ropa"     style="display:none">
+                    <img class="mii-layer mii-layer-hair"    src="" alt="pelo"     style="display:none">
+                    <img class="mii-layer mii-layer-hat"     src="" alt="sombrero" style="display:none">
+                    <canvas class="mii-export-canvas" width="504" height="504" style="display:none"></canvas>
+                </div>
+                <div class="mii-name-row">
+                    <label class="mii-name-label">Nombre</label>
+                    <input class="mii-name-input" type="text" value="Mi Muñequito" oninput="miiUpdateName(this)" maxlength="20">
+                </div>
+                <div class="mii-btn-row">
+                    <button class="mii-btn mii-btn-accent" onclick="miiRandom(this)">🎲 Aleatorio</button>
+                    <button class="mii-btn" onclick="miiSave(this)">💾 Guardar PNG</button>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="mii-col-editor">
+            <div class="mii-lock-overlay">
+                <div class="mii-lock-msg">🎲 Presiona <strong>Aleatorio</strong> para comenzar a editar</div>
+            </div>
+            <div class="mii-cat-tabs">
+                <button class="mii-cat-tab active" onclick="miiSwitchTab('body',this)">🧍 Cuerpo</button>
+                <button class="mii-cat-tab"        onclick="miiSwitchTab('clothes',this)">👕 Ropa</button>
+                <button class="mii-cat-tab"        onclick="miiSwitchTab('hair',this)">💇 Pelo</button>
+                <button class="mii-cat-tab"        onclick="miiSwitchTab('hat',this)">🎩 Sombrero</button>
+            </div>
+            <div class="mii-card mii-editor-card">
+
+                <div class="mii-cat-panel active" data-panel="body">
+                    <div class="mii-section-label">Color del cuerpo</div>
+                    <div class="mii-color-row mii-body-colors"></div>
+                </div>
+
+                <div class="mii-cat-panel" data-panel="clothes">
+                    <div class="mii-section-label">Ropa</div>
+                    <div class="mii-part-grid mii-clothes-grid"></div>
+                    <div class="mii-section-label" style="margin-top:6px;">Color de ropa</div>
+                    <div class="mii-color-row mii-clothes-color-row"></div>
+                </div>
+
+                <div class="mii-cat-panel" data-panel="hair">
+                    <div class="mii-section-label">Pelo</div>
+                    <div class="mii-part-grid mii-hair-grid"></div>
+                    <div class="mii-section-label" style="margin-top:6px;">Color de pelo</div>
+                    <div class="mii-color-row mii-hair-color-row"></div>
+                </div>
+
+                <div class="mii-cat-panel" data-panel="hat">
+                    <div class="mii-section-label">Sombrero</div>
+                    <div class="mii-part-grid mii-hat-grid"></div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+</div>
+    </div>
+</div>
+
+<div id="credits-content" class="window-template">
+    <div class="xp-credits-layout">
+
+        <div class="xp-credits-sidebar">
+            <div class="xp-credits-logo-area">
+                <div class="xp-credits-bliss">
+                    <div class="xp-bliss-sky"></div>
+                    <div class="xp-bliss-hills"></div>
+                </div>
+                <div class="xp-credits-os-badge">
+                    <div class="xp-credits-flag">
+                        <div class="xp-flag-tl"></div>
+                        <div class="xp-flag-tr"></div>
+                        <div class="xp-flag-bl"></div>
+                        <div class="xp-flag-br"></div>
+                    </div>
+                    <div class="xp-credits-os-text">
+                        <span class="xp-credits-os-name">TokOs</span>
+                        <span class="xp-credits-os-edition">Personal Edition</span>
+                    </div>
+                </div>
+            </div>
+            <div class="xp-credits-sidebar-links">
+                <a class="xp-credits-sidebar-link" href="https://github.com/TokusOP" target="_blank">🌐 GitHub</a>
+                <a class="xp-credits-sidebar-link" href="https://www.youtube.com/@TokusOP" target="_blank">▶ YouTube</a>
+            </div>
+        </div>
+
+        <div class="xp-credits-main">
+            <div class="xp-credits-tabs">
+                <button class="xp-credits-tab active" onclick="xpCreditsTab('about',this)">Acerca de</button>
+                <button class="xp-credits-tab" onclick="xpCreditsTab('tech',this)">Tecnología</button>
+                <button class="xp-credits-tab" onclick="xpCreditsTab('music',this)">Música</button>
+            </div>
+            <div class="xp-credits-tab-body">
+                <div class="xp-credits-panel" id="xpc-about">
+                    <div class="xp-credits-section-header">Sistema</div>
+                    <div class="xp-credits-prop-list">
+                        <div class="xp-credits-prop"><span>Versión:</span><span>TokOs 1.0 Build 2025</span></div>
+                        <div class="xp-credits-prop"><span>Desarrollado por:</span><span>TokusOP</span></div>
+                        <div class="xp-credits-prop"><span>Concepto:</span><span>Portafolio interactivo</span></div>
+                    </div>
+                    <div class="xp-credits-section-header" style="margin-top:12px;">Dedicado a</div>
+                    <div class="xp-credits-dedication-box">
+                        <div class="xp-credits-ded-icon">🐱</div>
+                        <div>
+                            <div class="xp-credits-ded-name">Guppy</div>
+                            <div class="xp-credits-ded-sub">El gato más amoroso del mundo</div>
+                        </div>
+                    </div>
+                    <div class="xp-credits-eula">
+                        <p>Este software es para uso personal. Hecho con demasiado café y nostalgia.</p>
+                        <p>© 2026 TokusOP. Todos los derechos reservados.</p>
+                    </div>
+                </div>
+                <div class="xp-credits-panel" id="xpc-tech" style="display:none">
+                    <div class="xp-credits-section-header">Componentes del sistema</div>
+                    <table class="xp-credits-comp-table">
+                        <tr><th>Componente</th><th>Versión</th><th>Estado</th></tr>
+                        <tr><td>HTML5</td><td>Living Standard</td><td class="xp-ok">✓ OK</td></tr>
+                        <tr><td>CSS3</td><td>Level 3</td><td class="xp-ok">✓ OK</td></tr>
+                        <tr><td>JavaScript</td><td>ES2024</td><td class="xp-ok">✓ OK</td></tr>
+                        <tr><td>Canvas API</td><td>2D Context</td><td class="xp-ok">✓ OK</td></tr>
+                        <tr><td>Web Audio API</td><td>v1</td><td class="xp-ok">✓ OK</td></tr>
+                        <tr><td>Touch Events</td><td>Level 2</td><td class="xp-ok">✓ OK</td></tr>
+                        <tr><td>LocalStorage</td><td>HTML5</td><td class="xp-ok">✓ OK</td></tr>
+                    </table>
+                </div>
+                <div class="xp-credits-panel" id="xpc-music" style="display:none">
+                    <div class="xp-credits-section-header">Pistas de audio</div>
+                    <table class="xp-credits-comp-table">
+                        <tr><th>Título</th><th>Fuente</th></tr>
+                        <tr><td>lotus waters</td><td>yume 2kki</td></tr>
+                        <tr><td>Waterfall</td><td>Undertale — Toby Fox</td></tr>
+                        <tr><td>Dog</td><td>Minecraft — C418</td></tr>
+                        <tr><td>Song of Healing</td><td>Zelda: Majora — Koji Kondo</td></tr>
+                    </table>
+                </div>
+            </div>
+            <div class="xp-credits-footer-btns">
+                <button class="retro-button" onclick="closeWindow('credits')">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="gallery-content" class="window-template">
+    <div class="gallery-shell">
+        <div class="gallery-toolbar">
+            <button class="gallery-tb-btn active" id="gbtn-grid" onclick="galleryView('grid',this)">⊞ Miniaturas</button>
+            <button class="gallery-tb-btn" id="gbtn-film" onclick="galleryView('film',this)">▣ Pantalla completa</button>
+            <div class="gallery-sep"></div>
+            <button class="gallery-tb-btn" onclick="galleryPrev()">◀</button>
+            <button class="gallery-tb-btn" onclick="galleryNext()">▶</button>
+            <div class="gallery-sep"></div>
+            <span class="gallery-counter" id="gallery-counter">1 de 10</span>
+        </div>
+        <div class="gallery-body">
+            <div id="gallery-grid-view" class="gallery-grid-view">
+                <div class="gallery-thumb-grid" id="gallery-thumb-grid"></div>
+            </div>
+            <div id="gallery-lightbox" class="gallery-lightbox" style="display:none;">
+                <div class="gallery-lb-img-wrap">
+                    <img id="gallery-lb-img" class="gallery-lb-img" src="images/wallpaper.jpg" alt="">
+                </div>
+                <div class="gallery-lb-caption" id="gallery-lb-caption">Foto 1</div>
+                <div class="gallery-film-strip" id="gallery-film-strip"></div>
+            </div>
+        </div>
+        <div class="gallery-statusbar"><span id="gallery-status">10 fotos</span></div>
+    </div>
+</div>
+
+<div id="messenger-content" class="window-template">
+    <div class="msn-shell">
+        <div class="msn-sidebar">
+            <div class="msn-sidebar-header">
+                <img src="images/palm.png" class="msn-my-avatar-img" alt="TV-Parasite" onerror="this.style.display='none'">
+                <div class="msn-my-info">
+                    <div class="msn-my-name">TV-Parasite</div>
+                    <div class="msn-my-status">● En línea</div>
+                </div>
+            </div>
+            <div class="msn-contacts-header">Contactos (3)</div>
+            <div class="msn-contacts" id="msn-contact-list">
+                <div class="msn-contact msn-contact-active" id="msn-c-guppy" onclick="msnSelectContact('guppy',this)">
+                    <img src="images/guppy.png" class="msn-contact-avatar-img" alt="Guppy" onerror="this.style.display='none'">
+                    <div class="msn-contact-info">
+                        <div class="msn-contact-name">Guppy</div>
+                        <div class="msn-contact-status msn-online">● En línea</div>
+                    </div>
+                </div>
+                <div class="msn-contact" id="msn-c-tokusop" onclick="msnSelectContact('tokusop',this)">
+                    <img src="images/pfp_tokusop.png" class="msn-contact-avatar-img" alt="TokusOP" onerror="this.style.display='none'">
+                    <div class="msn-contact-info">
+                        <div class="msn-contact-name">TokusOP</div>
+                        <div class="msn-contact-status msn-away">● Ausente</div>
+                    </div>
+                </div>
+                <div class="msn-contact" id="msn-c-grupo" onclick="msnSelectContact('grupo',this)">
+                    <img src="images/hachi.png" class="msn-contact-avatar-img" alt="Grupo">
+                    <div class="msn-contact-info">
+                        <div class="msn-contact-name">Grupo</div>
+                        <div class="msn-contact-status msn-online">● 5 en línea</div>
+                    </div>
+                </div>
+            </div>
+            <div class="msn-sidebar-footer">TokIM 6.0 © 2004</div>
+        </div>
+        <div class="msn-chat-area">
+            <div class="msn-chat-header" id="msn-chat-header">
+                <img src="images/guppy.png" class="msn-header-avatar" id="msn-header-avatar" alt="">
+                <div class="msn-chat-header-info">
+                    <div class="msn-chat-with-name" id="msn-chat-with-name">Guppy</div>
+                    <div class="msn-chat-with-sub" id="msn-chat-with-sub">● En línea — El gato más ruidoso del universo</div>
+                </div>
+            </div>
+            <div class="msn-messages" id="msn-messages"></div>
+            <div class="msn-typing-bar" id="msn-typing-bar"><span id="msn-typing-text">Guppy está escribiendo...</span></div>
+            <div class="msn-input-area">
+                <div class="msn-emoji-bar" id="msn-emoji-bar">
+                    <button class="msn-emoji-btn" onclick="msnEmoji('😺')">😺</button>
+                    <button class="msn-emoji-btn" onclick="msnEmoji('❤️')">❤️</button>
+                    <button class="msn-emoji-btn" onclick="msnEmoji(':3')">:3</button>
+                    <button class="msn-emoji-btn" onclick="msnEmoji('xD')">xD</button>
+                    <button class="msn-emoji-btn" onclick="msnEmoji('(^_^)')">^_^</button>
+                    <button class="msn-emoji-btn" onclick="msnEmoji('T-T')">T-T</button>
+                    <button class="msn-emoji-btn" onclick="msnEmoji(':V')">:V</button>
+                </div>
+                <div class="msn-input-row">
+                    <textarea id="msn-input" class="msn-input" placeholder="Escribe un mensaje..." onkeydown="msnKeydown(event)"></textarea>
+                    <button class="msn-send-btn" onclick="msnSend()">Enviar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="screensaver-overlay" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:#000;z-index:99999;cursor:none;" onclick="hideScreensaver()">
+    <canvas id="ss-canvas" style="position:absolute;top:0;left:0;width:100%;height:100%;"></canvas>
+    <div style="position:absolute;bottom:20px;right:20px;color:rgba(255,255,255,0.3);font-family:'Courier New';font-size:11px;">Haz clic para continuar</div>
+</div>
+
+<div id="trash-content" class="window-template">
+    <div class="trash-toolbar">
+        <button class="trash-toolbar-btn" onclick="emptyTrash()">🗑️ Vaciar papelera</button>
+        <div class="trash-path">📂 Papelera de reciclaje</div>
+    </div>
+    <div class="trash-body">
+        <div class="trash-sidebar">
+            <div class="trash-sidebar-section">
+                <div class="trash-sidebar-title">Tareas de archivo</div>
+                <div class="trash-sidebar-item" onclick="emptyTrash()">🗑️ Vaciar papelera</div>
+                <div class="trash-sidebar-item" style="opacity:0.5;cursor:default;">♻️ Restaurar todo</div>
+            </div>
+            <div class="trash-sidebar-section">
+                <div class="trash-sidebar-title">Otros lugares</div>
+                <div class="trash-sidebar-item" onclick="openWindow('explorer')">📁 Mis documentos</div>
+            </div>
+        </div>
+        <div class="trash-main">
+            <div class="trash-list-container">
+                <div class="trash-list-header">
+                    <span>Nombre</span><span>Fecha eliminado</span><span>Tipo</span><span>Tamaño</span>
+                </div>
+                <ul id="trash-file-list"></ul>
+            </div>
+            <div class="trash-statusbar">
+                <span id="trash-status">3 objetos</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="pet-customizer-content" class="window-template">
+    <div class="pc-shell">
+        <div class="pc-sidebar">
+            <div class="pc-sidebar-header">Mascotas</div>
+            <div class="pc-sidebar-list">
+                <div class="pc-entry pc-entry-active" data-idx="0" onclick="petcustSelect(0)">
+                    <div class="pc-thumb-wrap"><img class="pc-thumb" id="pc-thumb-0" src="images/pet-guppy.png" alt="Guppy"></div>
+                    <div class="pc-entry-name">Guppy</div>
+                </div>
+                <div class="pc-entry" data-idx="1" onclick="petcustSelect(1)">
+                    <div class="pc-thumb-wrap"><img class="pc-thumb" id="pc-thumb-1" src="images/pet-toby.png" alt="Toby"></div>
+                    <div class="pc-entry-name">Toby</div>
+                </div>
+                <div class="pc-entry" data-idx="2" onclick="petcustSelect(2)">
+                    <div class="pc-thumb-wrap"><img class="pc-thumb" id="pc-thumb-2" src="images/pet-superjoy.png" alt="SuperJoy"></div>
+                    <div class="pc-entry-name">SuperJoy</div>
+                </div>
+                <div class="pc-entry" data-idx="3" onclick="petcustSelect(3)">
+                    <div class="pc-thumb-wrap"><img class="pc-thumb" id="pc-thumb-3" src="images/pet-peito.png" alt="Peito"></div>
+                    <div class="pc-entry-name">Peito</div>
+                </div>
+                <div class="pc-entry" data-idx="4" onclick="petcustSelect(4)">
+                    <div class="pc-thumb-wrap"><img class="pc-thumb" id="pc-thumb-4" src="images/pet-melisa.png" alt="Melisa"></div>
+                    <div class="pc-entry-name">Melisa</div>
+                </div>
+            </div>
+        </div>
+        <div class="pc-main">
+            <div class="pc-canvas-wrap">
+                <img id="pc-main-canvas" src="images/pet-guppy.png" alt="Mascota" style="display:block;width:210px;height:210px;object-fit:contain;image-rendering:pixelated;">
+            </div>
+            <div class="pc-info-panel">
+                <div class="pc-info-name" id="pc-name">Guppy</div>
+                <div class="pc-info-type" id="pc-desc">Gato</div>
+                <div class="pc-info-phrase" id="pc-phrase">"Miau..."</div>
+                <div class="pc-info-hint">↑ activa en el escritorio · haz clic para cambiar</div>
             </div>
         </div>
     </div>
 </div>
 
     <script src="scripts.js"></script>
+
+
+<div id="minesweeper-content" class="window-template">
+    <div class="ms-shell">
+        <div class="ms-toolbar">
+            <div class="ms-stat"><span class="ms-stat-icon">💣</span><span id="ms-bomb-count">10</span></div>
+            <button class="ms-face-btn" id="ms-face" onclick="msNewGame()">🙂</button>
+            <div class="ms-stat"><span class="ms-stat-icon">⏱</span><span id="ms-timer">0</span></div>
+        </div>
+        <div id="ms-grid" class="ms-grid"></div>
+        <div class="ms-statusbar" id="ms-status">Haz clic izquierdo para revelar · Derecho para bandera</div>
+    </div>
+</div>
+
+
+<div id="taskmanager-content" class="window-template">
+    <div class="tm-shell">
+        <div class="tm-tabs">
+            <button class="tm-tab tm-tab-active">Aplicaciones</button>
+            <button class="tm-tab" style="opacity:0.5;cursor:default;">Procesos</button>
+            <button class="tm-tab" style="opacity:0.5;cursor:default;">Rendimiento</button>
+        </div>
+        <div class="tm-list-wrap">
+            <div class="tm-list-header"><span>Tarea</span><span>Estado</span></div>
+            <ul id="tm-app-list" class="tm-app-list"></ul>
+        </div>
+        <div class="tm-footer">
+            <button class="tm-btn" onclick="tmSwitchTo()">Cambiar a</button>
+            <button class="tm-btn tm-btn-danger" onclick="tmEndTask()">Finalizar tarea</button>
+            <button class="tm-btn" onclick="tmRefresh()">↺ Actualizar</button>
+        </div>
+        <div class="tm-statusbar">
+            <span>Procesos: <b id="tm-proc-count">0</b></span>
+            <span>CPU: <b id="tm-cpu-use">--</b>%</span>
+            <span>Mem: <b id="tm-mem-use">--</b> MB</span>
+        </div>
+    </div>
+</div>
+
+
+<div id="bsod-overlay">
+    <div class="bsod-header">Problema grave en Windows</div>
+    <p class="bsod-text">Se ha producido un problema y Windows se ha cerrado para proteger el equipo.<br><br><b>IRQL_NOT_LESS_OR_EQUAL</b></p>
+    <p class="bsod-text">Si esta es la primera vez que aparece esta pantalla, reinicia el equipo. Si esta pantalla aparece de nuevo, sigue estos pasos:<br><br>Comprueba si has instalado nuevo hardware o software. Si es así, elimínalo o consulta al fabricante. Desactiva o elimina cualquier software antivirus recién instalado.</p>
+    <p class="bsod-text">Información técnica:<br><br>*** STOP: 0x0000000A (0x00000000, 0x00000002, 0x00000000, 0x80501D38)<br>*** tokos.exe - Dirección 0x80501D38 base 0x80400000, DateStamp 0x3c08f099</p>
+    <p class="bsod-text">Empieza a recopilar información de errores...<br><br><span id="bsod-progress">░░░░░░░░░░░░░░░░░░░░ 0% completo</span></p>
+    <p class="bsod-hint">Presiona cualquier tecla o haz clic para reiniciar</p>
+</div>
+
+
+<div id="wifi-popup" class="xp-popup">
+    <div class="xp-popup-titlebar">
+        <span class="xp-popup-icon">🌐</span>
+        <span class="xp-popup-title">Conexiones de red inalámbricas</span>
+        <button class="xp-popup-close" onclick="document.getElementById('wifi-popup').style.display='none'">✕</button>
+    </div>
+    <div class="xp-popup-body">
+        <div class="xp-wifi-connected">
+            <svg class="xp-wifi-icon" width="24" height="22" viewBox="0 0 20 18" fill="none">
+                <path d="M10 14.5a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z" fill="#00aa44"/>
+                <path d="M6.5 11C7.7 9.8 8.8 9.3 10 9.3s2.3.5 3.5 1.7" stroke="#00aa44" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+                <path d="M3.5 8C5.3 6.2 7.5 5.2 10 5.2s4.7 1 6.5 2.8" stroke="#00aa44" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+                <path d="M1 5C3.5 2.5 6.6 1 10 1s6.5 1.5 9 4" stroke="#00aa44" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+            </svg>
+            <div>
+                <div class="xp-wifi-ssid">SuperGuppy64</div>
+                <div class="xp-wifi-status">✓ Conectado</div>
+            </div>
+        </div>
+        <div class="xp-popup-table">
+            <div class="xp-popup-row"><span>Seguridad</span><span>WPA2-Personal</span></div>
+            <div class="xp-popup-row"><span>Velocidad</span><span>72 Mbps</span></div>
+            <div class="xp-popup-row"><span>Señal</span><span>Excelente ▂▄▆█</span></div>
+            <div class="xp-popup-row xp-popup-row-last"><span>IP local</span><span>10.0.1.42</span></div>
+        </div>
+        <div class="xp-popup-section-label">Otras redes disponibles</div>
+        <div class="xp-popup-table">
+            <div class="xp-popup-row">🔒 MOVISTAR_2G<span>▂▄▆_</span></div>
+            <div class="xp-popup-row">🔒 vecino-5G<span>▂▄__</span></div>
+            <div class="xp-popup-row xp-popup-row-last">🔒 DIRECT-Printer<span>▂___</span></div>
+        </div>
+    </div>
+</div>
+
+
+<div id="calendar-popup" class="xp-popup" style="width:230px;">
+    <div class="xp-popup-titlebar" id="cal-header-bar">
+        <button class="xp-cal-nav" onclick="calNav(-1)">◀</button>
+        <span id="cal-month-year" class="xp-popup-title"></span>
+        <button class="xp-cal-nav" onclick="calNav(1)">▶</button>
+        <button class="xp-popup-close" onclick="document.getElementById('calendar-popup').style.display='none'">✕</button>
+    </div>
+    <div id="cal-grid" class="xp-cal-grid"></div>
+</div>
+
+
+<div id="system-dialog-overlay" class="xp-dialog-overlay">
+    <div class="xp-dialog">
+        <div id="sd-header" class="xp-popup-titlebar">
+            <span id="sd-icon" class="xp-popup-icon">⚠</span>
+            <span id="sd-title" class="xp-popup-title">Sistema</span>
+        </div>
+        <div class="xp-dialog-body">
+            <div id="sd-message" class="xp-dialog-message"></div>
+            <input type="text" id="sd-input" class="xp-dialog-input" style="display:none;" placeholder="" autocomplete="off">
+        </div>
+        <div id="sd-buttons" class="xp-dialog-buttons"></div>
+    </div>
+</div>
+
+
+<div id="xp-achievement-container"></div>
+
 </body>
 </html>

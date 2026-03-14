@@ -1,23 +1,58 @@
-# 💾 Tokus' Digital Wasteland
+# Tokus' Digital Wasteland
 
-**// Archivos de sistema corrompidos con arte, nostalgia y bugs.**
+**Escritorio virtual estilo Windows XP, construido desde cero con HTML, CSS y JavaScript puro.**
 
 <div align="center">
-  <img src="https://img.shields.io/badge/CRT_GLOW-ON-ff66ff?style=for-the-badge" alt="CRT ON">
-  <img src="https://img.shields.io/badge/SOUNDTRACK-Breakcore_y_LoFi-00ccff?style=for-the-badge" alt="Music">
-  <img src="https://img.shields.io/badge/OS-Windows_XP_Energy-ff9900?style=for-the-badge" alt="WinXP Style">
+  <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white">
+  <img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white">
+  <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black">
+  <img src="https://img.shields.io/badge/Estático-Sin_backend-lightgrey?style=for-the-badge">
 </div>
 
 ---
-### `>> FUNCION`
-![Image](https://github.com/user-attachments/assets/a8bf6fcb-b6ff-48af-92ad-c9b1754a106d)
 
-### `>> CARGANDO SISTEMA`  
-- **Alma de píxeles**: Un explorador de mazmorras y un pirata de shooters.
-- **Estética**: El brillo defectuoso de un monitor CRT y la energía de Windows XP.
-- **Habilidades**: Programación básica, diseño digital, y la capacidad de convertir errores en arte.
+![preview](https://github.com/user-attachments/assets/a8bf6fcb-b6ff-48af-92ad-c9b1754a106d)
 
-### `>> CARPETA DE RECURSOS`  
-```bash
-🖌️ Frontend: HTML5 | CSS3 | JavaScript
-🎮 Backend: Sitio estático. Por ahora, no hay conexión a la red.
+---
+
+## Features
+
+- 🖥️ **Pantalla de login** estilo Windows XP con transición de entrada
+- 🪟 **Ventanas arrastrables** con minimizar, maximizar y cerrar
+- 🎵 **Reproductor de música** con playlist, barra de progreso y visualizador
+- 🐍 **Snake** jugable directamente en el escritorio
+- 💣 **Buscaminas** con temporizador y banderas
+- 🎨 **Paint** con múltiples pinceles, colores y opacidad
+- 📁 **Explorador de archivos** y **Bloc de notas** funcionales
+- 💬 **TokIM** — mensajería instantánea simulada con contactos y grupos
+- 🐾 **Mascotas de escritorio** personalizables
+- 🌐 **Hotline Explorer** — navegador interno con páginas propias
+- ⚙️ **Configuración**: fondo de pantalla, modo oscuro, protector de pantalla
+- 🏆 **Sistema de logros** desbloqueables
+- 💀 **BSOD**, efectos de virus y otros easter eggs
+
+---
+
+## Demo
+
+🌐 **[tu-usuario.github.io/tu-repo](https://tu-usuario.github.io/tu-repo)**
+
+---
+
+## Tecnologías
+
+| Área | Detalle |
+|------|---------|
+| Frontend | HTML5, CSS3, JavaScript (vanilla) |
+| Audio | Web Audio API + archivos `.mp3` locales |
+| Gráficos | Canvas API (Paint, Snake, mascotas animadas) |
+| Persistencia | `localStorage` |
+| Fuentes | Google Fonts (Press Start 2P, Tahoma) |
+
+---
+
+## Créditos
+
+Hecho por **TokusP** — [github.com/TokusP](https://github.com/TokusP)
+
+Música incluida: *lotus waters* (yume 2kki) · *Waterfall* (Toby Fox) · *Dog* (C418) · *Song of Healing* (Koji Kondo)
